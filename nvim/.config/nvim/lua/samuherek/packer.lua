@@ -27,6 +27,9 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
 
+  use('sbdchd/neoformat')
+  use('prettier/vim-prettier')
+
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v2.x',
