@@ -17,7 +17,11 @@ return require('packer').startup(function(use)
 	  'rose-pine/neovim', 
 	  as = 'rose-pine',
       variant = 'moon',
-	  dark_variant = 'moon'
+	  dark_variant = 'moon',
+      disable_italics = true,
+      groups = {
+        comment = 'muted',
+      }
   })
   vim.cmd('colorscheme rose-pine')
 
