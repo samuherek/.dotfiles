@@ -7,12 +7,14 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   
+    -- Telescope plugin
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.2',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  -- Rose pine color theme
   use({ 
 	  'rose-pine/neovim', 
 	  as = 'rose-pine',
@@ -25,6 +27,7 @@ return require('packer').startup(function(use)
   })
   vim.cmd('colorscheme rose-pine')
 
+  
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
   use('ThePrimeagen/harpoon')
@@ -33,6 +36,7 @@ return require('packer').startup(function(use)
 
   use('sbdchd/neoformat')
   use('prettier/vim-prettier')
+  use('jparise/vim-graphql');
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
