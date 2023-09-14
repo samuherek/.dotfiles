@@ -1,0 +1,10 @@
+<base>
+[z]>[z][t&h150][lctr]
+[up]>[down]
+[down]>[up]
+[lctr]>[lwin]
+[del]>[xawx]
+<keypad>
+<function1>
+<function2>
+<function3>
