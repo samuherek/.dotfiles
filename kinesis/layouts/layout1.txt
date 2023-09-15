@@ -1,9 +1,12 @@
 <base>
 [z]>[z][t&h150][lctr]
+[fsls]>[fsls][t&h150][rctr]
 [up]>[down]
 [down]>[up]
-[lctr]>[lwin]
-[del]>[xawx]
+[lctr]>[lalt]
+[rctr]>[ralt]
+[del]>[lwin]
+[end]>[xawx]
 <keypad>
 <function1>
 <function2>
