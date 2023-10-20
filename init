@@ -1,0 +1,244 @@
+#!/bin/bash
+
+# function to style the echo output red.
+red() {
+    echo -e "\033[0;31m$1\033[0m"
+}
+
+# function to style the echo output green.
+green() {
+    echo -e "\033[0;32m$1\033[0m"
+}
+
+# ----------------
+# INITIALIZATION
+# ----------------
+
+echo "Hello $(whoami)! Let's get you set up."
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# ask for password up front.
+echo "Please provide the password for $(whoami) to get you started:"
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# -----------------
+# BASE INSTALATIONS 
+# -----------------
+
+# Install ecode stuff as we'll need it no matter what.
+if ! xcode-select --print-path &>/dev/null; then
+    echo "Installing Xcode Command Line Tools..."
+    xcode-select --install
+
+    # Wait until the Xcode Command Line Tools are installed
+    while ! xcode-select --print-path &>/dev/null; do
+        sleep 5
+    done
+
+    green "Xcode Command Line Tools installed."
+else
+    green "Xcode Command Line Tools already installed."
+fi
+
+# Check for Homebrew and install if not found
+if ! command -v brew &>/dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # homebrew requires us to run this right after install in the next steps
+    # It could change in the future. periodically check if it is still up to date.
+    echo "Setting up homebrew paths"
+    shellenv_path="/Users/$(whoami)/.zprofile"
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $shellenv_path 
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
+    green "Homebrew installed."
+else
+    green "Homebrew already installed."
+fi
+
+
+# -----------------------------------------
+# Ask to apply the macos general defaults
+# -----------------------------------------
+
+# Prompt user to apply the macOS defaults
+while true; do
+    echo -n "Would you like to apply the general defaults to macos settings? [y/n]: "
+    read defaults_answer
+
+    case $defaults_answer in 
+        [Yy]* )
+            local defaults_path="./scripts/defaults/init.sh"
+
+            if [ ! -f "$defaults_path" ]; then
+                echo "Could not find $defaults_path. Please contact the maintainer."
+                exit 1
+            else
+                source "$defaults_path"
+                green "macOS defaults applied. Make sure to restart your computer for them to take effect fully."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping setting up macOS defaults."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
+
+
+# -----------------------------------------
+# Ask to intall brew formulas 
+# -----------------------------------------
+
+# Prompt user to intall the formulas 
+while true; do
+    echo -n "Would you like to install brew formulas? [y/n]: "
+    read formulas_answer
+
+    case $formulas_answer in 
+        [Yy]* )
+            local formulas_path="./scripts/homebrew/install-formulas.sh"
+
+            # Check the existence of each script file
+            if [ ! -f "$formulas_path" ]; then
+                echo "Error: the $formulas_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$formulas_path"
+                green "Brew formulas successfully installed."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping installing brew formulas."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
+
+
+# -----------------------------------------
+# Ask to intall brew casks 
+# -----------------------------------------
+
+# Prompt user to intall the casks
+while true; do
+    echo -n "Would you like to install brew casks? [y/n]: "
+    read casks_answer
+
+    case $casks_answer in 
+        [Yy]* )
+            local casks_path="./scripts/homebrew/install-casks.sh"
+
+            # Check the existence of each script file
+            if [ ! -f "$casks_path" ]; then
+                echo "Error: the $casks_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$casks_path"
+                green "Brew casks successfully installed."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping installing brew casks."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
+
+
+# -----------------------------------------
+# Ask to start yabai 
+# -----------------------------------------
+
+# Prompt user to intall the casks
+while true; do
+    echo -n "Would you like to start yabai? [y/n]: "
+    read yabai_answer
+
+    case $yabai_answer in 
+        [Yy]* )
+            local yabai_path="./scripts/yabai/init.sh"
+
+            # Check the existence of each script file
+            if [ ! -f "$yabai_path" ]; then
+                echo "Error: the $yabai_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$yabai_path"
+                green "Yabai service started successfully."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping starting yabai."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
+
+
+# -----------------------------------------
+# Ask to start skhd 
+# -----------------------------------------
+
+# Prompt user to intall the casks
+while true; do
+    echo -n "Would you like to start skhd? [y/n]: "
+    read yabai_answer
+
+    case $yabai_answer in 
+        [Yy]* )
+            local yabai_path="./scripts/skhd/init.sh"
+
+            # Check the existence of each script file
+            if [ ! -f "$yabai_path" ]; then
+                echo "Error: the $yabai_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$yabai_path"
+                green "Yabai service started successfully."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping starting skhd."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
+
+

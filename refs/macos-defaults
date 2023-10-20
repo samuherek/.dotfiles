@@ -1,0 +1,1342 @@
+# Defaults:::
+
+# -------------------------------
+# Expanding Save and Print Panels
+# -------------------------------
+
+# Purpose: Ensures that the save panel is expanded by default.
+# Impact: When you go to save a document, the detailed save panel (with options for location, tags, etc.) is expanded automatically.
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Purpose: Ensures that the print panel is expanded by default.
+# Impact: When you go to print a document, the detailed print panel is expanded automatically.
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# -------------------------------
+# Saving to Disk vs. iCloud
+# -------------------------------
+
+#Purpose: Determines where documents are saved by default.
+#Impact: New documents will be saved to the local disk by default instead of iCloud.
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# -------------------------------
+# Printer App Behavior
+# -------------------------------
+
+# Purpose: Alters behavior of the printer app.
+# Impact: The printer app will quit automatically after finishing the print jobs.
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# -------------------------------
+# Crash Reporter
+# -------------------------------
+
+# Purpose: Modifies the behavior of the crash reporter.
+# Impact: Disables the crash reporter dialog, which typically appears when an application crashes.
+defaults write com.apple.CrashReporter DialogType -string "none"
+
+# -------------------------------
+# Typing and Text Substitutions 
+# -------------------------------
+
+# Purpose: Tweaks text handling and substitution settings.
+# Impact:
+# Disables automatic capitalization.
+# Disables smart dashes substitution.
+# Disables automatic period substitution after double spaces.
+# Disables smart quotes substitution.
+# Disables automatic spelling correction.
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+
+
+# -------------------------------
+# Boot Sound Effects
+# -------------------------------
+
+# Purpose: Alters system NVRAM settings.
+# Impact: Mutes the startup chime that plays when the Mac boots up.
+sudo nvram SystemAudioVolume=" "
+
+
+
+
+# -----------------------------------------------------------
+
+# Purpose: Indicates the last locale setting.
+# Impact: Can influence language and region-based settings across macOS.
+# Location in GUI: System Preferences → Language & Region.
+defaults write NSGlobalDomain AKLastLocale -string "en_SK"
+
+# Purpose: Dictates the action taken when a window title bar is double-clicked.
+# Impact: Changes the behavior of window double-click.
+# Location in GUI: System Preferences → Dock & Menu Bar → "Double-click a window's title bar to" option.
+defaults write NSGlobalDomain AppleActionOnDoubleClick -string "Maximize"
+
+# Purpose: Determines the threshold for font anti-aliasing, which makes text smoother.
+# Impact: Text rendering might appear differently depending on the set value.
+# Location in GUI: Might not be directly exposed in the GUI.
+defaults write NSGlobalDomain AppleAntiAliasingThreshold -int 4
+
+# Purpose: Specifies the color variant for the Aqua interface.
+# Impact: Could change the appearance of certain UI elements.
+# Location in GUI: Probably not directly exposed in the GUI.
+defaults write NSGlobalDomain AppleAquaColorVariant -int 1
+
+# Purpose: Sets the level of font smoothing.
+# Impact: Affects the clarity and appearance of text across macOS.
+# Location in GUI: System Preferences → General → "Use font smoothing when available".
+defaults write NSGlobalDomain AppleFontSmoothing -int 1
+
+# Purpose: Determines the color used to highlight text and other UI elements.
+# Impact: Changes the visual appearance of selected items and highlights.
+# Location in GUI: System Preferences → General → "Highlight color".
+defaults write NSGlobalDomain AppleHighlightColor -string "0.752941 0.964706 0.678431 Green"
+
+# Purpose: Sets the theme style for the macOS interface.
+# Impact: Changes the appearance of macOS between light and dark modes.
+# Location in GUI: System Preferences → General → "Appearance".
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
+# Purpose: Sets the preferred language(s) for system and apps.
+# Impact: Impacts the primary language used across macOS.
+# Location in GUI: System Preferences → Language & Region → Preferred languages.
+defaults write NSGlobalDomain AppleLanguages -array "en-SK"
+
+# Purpose: Dictates the locale used by the system, influencing formatting of dates, currency, etc.
+# Impact: Affects system-wide locale-based settings.
+# Location in GUI: System Preferences → Language & Region → Region.
+defaults write NSGlobalDomain AppleLocale -string "en_SK"
+
+# Purpose: Indicates if the menu bar is visible when apps are in fullscreen mode.
+# Impact: Affects visibility of the menu bar in fullscreen apps.
+# Location in GUI: Not directly exposed in GUI but can be observed in fullscreen mode behavior.
+defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool true
+
+# Purpose: Dictates the action taken when a window title bar is double-clicked.
+# Impact: Changes the behavior of window double-click.
+# Location in GUI: System Preferences → Dock & Menu Bar → "Double-click a window's title bar to" option.
+defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
+
+# Purpose: Determines the behavior of key press-and-hold in certain contexts (e.g., to bring up accent character options).
+# Impact: Affects key hold behavior.
+# Location in GUI: Might not be directly exposed in the GUI, but it affects how holding down certain keys behaves (e.g., "e" can show é, ê, etc.).
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Purpose: Indicates if there's reduced tinting for the desktop.
+# Impact: Affects the visual appearance of the desktop.
+# Location in GUI: This is likely an internal setting and may not be exposed in the GUI.
+defaults write NSGlobalDomain AppleReduceDesktopTinting -bool false
+
+# Purpose: Determines the behavior of scroll bar paging.
+# Impact: Affects how scroll bars respond to clicks.
+# Location in GUI: System Preferences → General → "Click in the scroll bar to".
+defaults write NSGlobalDomain AppleScrollerPagingBehavior -bool false
+
+# Purpose: Sets whether all file extensions should be shown in Finder.
+# Impact: Influences visibility of file extensions in Finder.
+# Location in GUI: Finder Preferences → Advanced → "Show all filename extensions".
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Purpose: Dictates when scroll bars are visible.
+# Impact: Determines scroll bar appearance behavior.
+# Location in GUI: System Preferences → General → "Show scroll bars".
+defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic"
+
+
+# Purpose: Determines whether the cursor location magnification feature is disabled.
+# Impact: Affects the behavior of cursor magnification when trying to find its location.
+# Location in GUI: This is likely an internal setting and may not be exposed in the GUI.
+defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool false
+
+# Purpose: Sets the delay for the initial key repeat.
+# Impact: Influences the delay before a key starts repeating when held down.
+# Location in GUI: System Preferences → Keyboard → "Delay Until Repeat" slider.
+defaults write NSGlobalDomain InitialKeyRepeat -real 15
+
+# Purpose: Determines the style for double quotes.
+# Impact: Affects the formatting of double quotes in specific contexts.
+# Location in GUI: System Preferences → Keyboard → Text → "Use smart quotes" setting.
+defaults write NSGlobalDomain KB_DoubleQuoteOption -string "“abc”"
+
+# Purpose: Determines the style for single quotes.
+# Impact: Affects the formatting of single quotes in specific contexts.
+# Location in GUI: System Preferences → Keyboard → Text → "Use smart quotes" setting.
+defaults write NSGlobalDomain KB_SingleQuoteOption -string "‘abc’"
+
+# Purpose: Dictates the automatic spelling language.
+# Impact: Used to determine which language to prioritize for spell check.
+# Location in GUI: May not be directly exposed in GUI but is related to system language preferences.
+defaults write NSGlobalDomain KB_SpellingLanguageIsAutomatic -bool true
+
+# Purpose: Sets the key repeat rate.
+# Impact: Influences how quickly a key repeats when held down.
+# Location in GUI: System Preferences → Keyboard → "Key Repeat" slider.
+defaults write NSGlobalDomain KeyRepeat -real 2
+
+# Purpose: Enables or disables automatic capitalization.
+# Impact:Affects whether the first letter of a sentence is automatically capitalized.
+# Location in GUI: System Preferences → Keyboard → Text → "Capitalize words automatically".
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool true
+
+# Purpose: Determines if spelling correction is automatic.
+# Impact: Affects if misspelled words are auto-corrected.
+# Location in GUI: System Preferences → Keyboard → Text → "Correct spelling automatically".
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
+
+# Purpose: Sets the behavior for dashes.
+# Impact: Dictates if typed dashes are replaced by longer em-dashes automatically.
+# Location in GUI: System Preferences → Keyboard → Text → "Use smart dashes" setting.
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool true
+
+# Purpose: Dictates the behavior for quote substitution.
+# Impact: Determines if straight quotes are replaced with smart quotes automatically.
+# Location in GUI: System Preferences → Keyboard → Text → "Use smart quotes" setting.
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool true
+
+# Purpose: Sets the behavior for period substitution.
+# Impact: Decides if double-tapping the space bar will insert a period.
+# Location in GUI: System Preferences → Keyboard → Text → "Add period with double-space" setting.
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Purpose: Determines if text completion suggestions are collapsed by default.
+# Impact: Influences whether the system provides auto-suggestions in a collapsed or expanded view.
+# Location in GUI: This might be an internal setting and might not have a direct representation in the GUI.
+defaults write NSGlobalDomain NSAutomaticTextCompletionCollapsed -bool true
+
+# Purpose: Sets the state for enabling text completion.
+# Impact: Decides if the system provides automatic text completion suggestions.
+# Location in GUI: System Preferences → Keyboard → Text → "Text Completion" setting (or a similar option).
+defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool true
+
+# Purpose: Determines where new documents are saved by default.
+# Impact: New documents will be saved to the local disk by default instead of iCloud.
+# Location in GUI: System Preferences → iCloud → "Documents & Desktop" setting.
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Purpose: Sets the list of linguistic data assets that were requested.
+# Impact: Dictates which linguistic data assets the system should prioritize.
+# Location in GUI: This might be related to the system's language and region settings, but may not be directly accessible.
+defaults write NSGlobalDomain NSLinguisticDataAssetsRequested -array "en" "en_SK" "sk" "sk_SK" "en_GB" "de" "cs" "pl" "it" "nl" "ro" "fr" "pt" "es" "nb" "nn" "hu"
+
+# Purpose: Sets the list of linguistic data assets requested by the checker.
+# Impact: Influences which linguistic checkers or spell-checkers are used.
+# Location in GUI: This is likely related to system or application language preferences, but the exact mapping might not be directly visible.
+defaults write NSGlobalDomain NSLinguisticDataAssetsRequestedByChecker -array "en" "it" "cs" "de" "nl" "ro" "fr" "pt" "pl" "es" "nb" "nn" "hu"
+
+# Purpose: Saves the expanded state of the navigation panel in save mode.
+# Impact: Influences the default view of the save dialog.
+# Location in GUI: This setting would be observed when using the "Save" or "Save As" dialog in applications.
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+# Purpose: Another setting related to the navigation panel's expanded state in save mode.
+# Impact: Likely a version or variant of the above setting.
+# Location in GUI: Similar to the above, it would affect the "Save" or "Save As" dialogs.
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Purpose: Sets the preferred web services provider for web search.
+# Impact: Determines the default web search provider for certain functions.
+# Location in GUI: System Preferences → General → "Default web browser" or a similar setting, but this might not be directly changeable in the GUI.
+defaults write NSGlobalDomain NSWebServicesProviderWebSearch -dict NSDefaultDisplayName "Google" NSProviderIdentifier "com.google.www"
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Purpose: Specifies the preferred position of the Airplay menu extra.
+# Impact: Determines where the Airplay icon appears in the menu bar.
+# Location in GUI: Dragging the Airplay icon on the Mac menu bar while holding down the Command key.
+defaults write NSGlobalDomain "NSStatusItem Preferred Position com.apple.menuextra.airplay" -real 20329
+
+# Purpose: Determines the default size mode for table views.
+# Impact: Influences how data is displayed in table views throughout the system.
+# Location in GUI: This might be an internal setting and might not have a direct representation in the GUI.
+# ?
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
+
+# Purpose: Decides whether animated focus rings are used.
+# Impact: Affects how focus rings (those blue outlines around selected items) are animated.
+# Location in GUI: Likely internal with no direct GUI representation.
+defaults write NSGlobalDomain NSUseAnimatedFocusRing -bool false
+
+# Purpose: Specifies user dictionary replacement items.
+# Impact: Custom text replacements that the user has set up.
+# Location in GUI: System Preferences → Keyboard → Text.
+defaults write NSGlobalDomain NSUserDictionaryReplacementItems -array-add "{on = 1; replace = 'omw'; with = 'On my way!';}"
+
+# Purpose: Sets the user's preferred quotation marks.
+# Impact: Specifies which characters are used as default quotation marks.
+# Location in GUI: This could be part of a language or regional setting, but the exact location is not certain.
+defaults write NSGlobalDomain NSUserQuotesArray -array "“" "”" "‘" "’"
+
+# Purpose: Saves the expanded state of the print panel.
+# Impact: Influences the default view of the print dialog.
+# Location in GUI: This setting would be observed when using the "Print" dialog in applications.
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+
+# Purpose: Another setting related to the print panel's expanded state.
+# Impact: Likely a version or variant of the above setting.
+# Location in GUI: Similar to the above, it would affect the "Print" dialogs.
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Purpose: Specifies whether spelling corrections are made automatically in web content.
+# Impact: Affects how text is corrected in browsers and other web-related contexts.
+# Location in GUI: This could be related to a browser's settings, such as Safari's "Auto-Correct" setting.
+defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool true
+
+# Purpose: Allows developer extras in WebKit-based browsers.
+# Impact: Enables developer-related features and tools in browsers.
+# Location in GUI: In Safari, this would correspond to the "Show Develop menu in menu bar" option in Preferences → Advanced.
+# ?
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Purpose: Determines if the menu bar is hidden.
+# Impact: If set to true, the macOS menu bar is hidden by default.
+# Location in GUI: System Preferences → General → "Automatically hide and show the menu bar".
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+
+
+
+
+
+
+
+
+
+
+
+
+# Purpose: Contains extensions and their sync status for Finder.
+# Impact: Dictates which extensions are allowed to synchronize with Finder.
+# Location in GUI: Finder extensions can be found in System Preferences → Extensions → Finder, though individual sync status might not be directly editable there.
+defaults write com.apple.finder SyncExtensions -dict-add collaborationMap -dict com.adobe.accmac.ACCFinderSync -bool true com.setapp.DesktopClient.SetappAgent.FinderSyncExt -bool false com.synology.SynologyDrive.FinderHelper.FinderSync -bool false
+defaults write com.apple.finder SyncExtensions -dict-add dirMap -dict com.adobe.accmac.ACCFinderSync -array com.setapp.DesktopClient.SetappAgent.FinderSyncExt -array-add 'file:///Applications/Setapp/' com.synology.SynologyDrive.FinderHelper.FinderSync -array-add 'file:///Users/samuherek/SynologyDrive/'
+
+# Purpose: Sets the mouse scaling.
+# Impact: Adjusts the mouse tracking speed.
+# Location in GUI: System Preferences → Mouse → "Tracking Speed" slider.
+defaults write NSGlobalDomain com.apple.mouse.scaling -real 0.875
+
+# Purpose: Adjusts the flash behavior for system beeps.
+# Impact: Decides if the screen should flash when a system beep occurs.
+# Location in GUI: System Preferences → Accessibility → Audio → "Flash the screen when an alert sound occurs".
+defaults write NSGlobalDomain com.apple.sound.beep.flash -int 0
+
+# Purpose: Sets the delay for spring-loaded folder action.
+# Impact: Determines the time delay before spring-loaded folders activate.
+# Location in GUI: Not directly exposed in the GUI, but affects how quickly folders open when you drag something onto them.
+defaults write NSGlobalDomain com.apple.springing.delay -real 0.0
+
+# Purpose: Determines whether spring-loaded folders are enabled.
+# Impact: Dictates if folders automatically open when you drag something over them.
+# Location in GUI: Finder → Preferences → General → "Spring-loaded folders and windows".
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+
+# Purpose: Sets the direction of scroll gestures.
+# Impact: Influences the orientation of scroll directions (natural or traditional).
+# Location in GUI: System Preferences → Trackpad/Mouse → "Scroll direction: natural".
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+# Purpose: Determines if Force Click is enabled for the trackpad.
+# Impact: Dictates if pressing harder on the trackpad initiates a Force Click.
+# Location in GUI: System Preferences → Trackpad → "Force Click and haptic feedback".
+defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool true
+
+# Purpose: Sets the scaling for the trackpad.
+# Impact: Adjusts the tracking speed for the trackpad.
+# Location in GUI: System Preferences → Trackpad → "Tracking Speed" slider.
+defaults write NSGlobalDomain com.apple.trackpad.scaling -real 1
+
+
+
+
+
+
+
+
+
+
+# Purpose: Determines the appearance of the Apple UI.
+# Impact: Decides if the user interface adopts a Light or Dark mode.
+# Location in GUI: System Preferences → General → "Appearance".
+defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
+
+# Purpose: Sets the preferred languages for system and apps.
+# Impact: Defines the language priority for system and applications.
+# Location in GUI: System Preferences → Language & Region → Preferred languages list.
+defaults write NSGlobalDomain AppleLanguages -array 'en-SK'
+
+# Purpose: Checks if languages have migrated to a newer version.
+# Impact: Used internally to determine if languages need migration.
+# Location in GUI: Not directly exposed in GUI.
+defaults write NSGlobalDomain AppleLanguagesDidMigrate -string '13.5'
+
+# Purpose: Specifies the version of the language schema.
+# Impact: Internal setting for Apple's language system.
+# Location in GUI: Not directly exposed in GUI.
+defaults write NSGlobalDomain AppleLanguagesSchemaVersion -int 3000
+
+# Purpose: Sets the locale of the system.
+# Impact: Defines date, time, and number formats based on the locale.
+# Location in GUI: System Preferences → Language & Region → Region dropdown.
+defaults write NSGlobalDomain AppleLocale -string 'en_SK'
+
+# Purpose: Dictates if the menu bar is visible in full-screen apps.
+# Impact: Decides whether the menu bar is persistently visible when an app is in full screen.
+# Location in GUI: Not directly exposed in GUI, though full-screen behavior is affected.
+defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool true
+
+# Purpose: Decides the miniaturization behavior on double-clicking a window title.
+# Impact: If set to true, windows will minimize to the dock when their title bar is double-clicked.
+# Location in GUI: System Preferences → Dock → "Minimize windows into application icon".
+defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
+
+# Purpose: Determines if the "press and hold" behavior for keys is active.
+# Impact: If enabled, pressing and holding a key will not repeatedly input the character but might show alternative characters (e.g., holding 'a' might show 'á', 'ä', etc.).
+# Location in GUI: System Preferences → Keyboard → "Press and hold keys for special characters".
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Purpose: Decides if the background tinting of windows should be reduced.
+# Impact: Affects the vibrancy and translucency of window backgrounds.
+# Location in GUI: Not directly exposed in GUI.
+defaults write NSGlobalDomain AppleReduceDesktopTinting -bool false
+
+# Purpose: Sets the paging behavior of scroll bars.
+# Impact: Dictates how content pages when you click in the scroll bar track.
+# Location in GUI: Not directly exposed in GUI.
+defaults write NSGlobalDomain AppleScrollerPagingBehavior -bool false
+
+
+
+# this is the old shit now
+# --------------------------------
+
+
+# Purpose: Expands the save panel by default.
+# Impact: When saving a file, the dialog will be expanded to show all options by default.
+# Location in GUI: Not directly exposed in GUI.
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Purpose: Expands the print panel by default.
+# Impact: When printing a file, the dialog will be expanded to show all options by default.
+# Location in GUI: Not directly exposed in GUI.
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Purpose: Determines where documents are saved by default.
+# Impact: New documents will be saved to the local disk by default instead of iCloud.
+# Location in GUI: Not directly exposed in GUI.
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Purpose: Automatically quits the printer app after print jobs complete.
+# Impact: The printer application will close after finishing its tasks.
+# Location in GUI: Not directly exposed in GUI.
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# Purpose: Disables the crash reporter dialog.
+# Impact: System will not prompt user with the crash report dialog when an application crashes.
+# Location in GUI: Not directly exposed in GUI.
+defaults write com.apple.CrashReporter DialogType -string "none"
+
+# Purpose: Disables automatic capitalization.
+# Impact: Text won't be automatically capitalized, useful when typing code.
+# Location in GUI: System Preferences → Keyboard → Text → "Capitalize words automatically".
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# Purpose: Disables smart dashes substitution.
+# Impact: Smart dashes won't replace standard dashes, useful when typing code.
+# Location in GUI: System Preferences → Keyboard → Text → "Use smart quotes and dashes".
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Purpose: Disables automatic period substitution.
+# Impact: An automatic period won't be added when pressing the spacebar twice, useful when typing code.
+# Location in GUI: System Preferences → Keyboard → Text.
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
+# Purpose: Disables smart quotes.
+# Impact: Smart quotes won't replace standard quotes, useful when typing code.
+# Location in GUI: System Preferences → Keyboard → Text → "Use smart quotes and dashes".
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Purpose: Disables auto-correct feature.
+# Impact: System won't auto-correct typed words.
+# Location in GUI: System Preferences → Keyboard → Text → "Correct spelling automatically".
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Purpose: Disables the sound effects during system boot.
+# Impact: The startup chime will be muted upon booting up the device.
+# Location in GUI: Not directly exposed in GUI.
+sudo nvram SystemAudioVolume=" "
+
+
+
+
+
+
+
+
+
+
+# Purpose: Sets the name of the computer as displayed in various places, including Sharing preferences and the terminal.
+# Impact: The computer name, host name, local host name, and NetBIOS name will be changed to "0x6D746873".
+# Location in GUI: System Preferences → Sharing
+sudo scutil --set ComputerName "0x6D746873"
+sudo scutil --set HostName "0x6D746873"
+sudo scutil --set LocalHostName "0x6D746873"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
+
+# Purpose: Changes the delay before the computer goes into standby mode.
+# Impact: The computer will go into standby after 24 hours of inactivity, up from the default of 1 hour.
+sudo pmset -a standbydelay 86400
+
+# Purpose: Disables the transparency effect in the menu bar and other areas in macOS Yosemite and later.
+# Impact: The menu bar and other transparent elements in macOS will be opaque.
+# Location in GUI: System Preferences → Accessibility → Display → Reduce transparency
+defaults write com.apple.universalaccess reduceTransparency -bool true
+
+# Purpose: Changes the color used to highlight selected text and other interface elements.
+# Impact: Highlighted elements will appear in green instead of the default blue.
+# Location in GUI: System Preferences → General → Highlight color
+defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
+
+# Purpose: Adjusts the size of icons in Finder and other application sidebars.
+# Impact: Icons in sidebars will be of medium size.
+# Location in GUI: Finder → Preferences → Sidebar → Icon size
+# ?
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
+
+# Purpose: Determines when scrollbars are displayed in windows.
+# Impact: Scrollbars will always be visible, regardless of input method or scrolling.
+# Location in GUI: System Preferences → General → Show scroll bars
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+# Purpose: Adjust the animation of the focus ring when selecting elements.
+# Impact: Removes the "over-the-top" focus ring animation.
+# Location in GUI: No direct location in GUI settings.
+defaults write NSGlobalDomain NSUseAnimatedFocusRing -bool false
+
+# Purpose: Adjust window resizing speed for Cocoa applications.
+# Impact: Increases the speed at which windows are resized.
+# Location in GUI: No direct location in GUI settings.
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+# Purpose: Configures the expanded state of the save panel.
+# Impact: Save panels will appear expanded by default.
+# Location in GUI: This is a system-wide preference not directly exposed in the GUI.
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Purpose: Configures the expanded state of the print panel.
+# Impact: Print panels will appear expanded by default.
+# Location in GUI: This is a system-wide preference not directly exposed in the GUI.
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Purpose: Adjusts behavior of printer application after print jobs.
+# Impact: Printer application will quit automatically after print jobs are complete.
+# Location in GUI: No direct location in GUI settings.
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# Purpose: Disables the confirmation dialog when opening applications.
+# Impact: Removes the "Are you sure you want to open this application?" dialog.
+# Location in GUI: Typically triggered when opening apps downloaded from the internet.
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Purpose: Display ASCII control characters using caret notation in text views.
+# Impact: Text views will show ASCII control characters using caret notation.
+# Location in GUI: This is a system-wide preference not directly exposed in the GUI.
+defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
+
+# Purpose: Disable the Resume feature system-wide.
+# Impact: Apps won't resume from their last state when restarted.
+# Location in GUI: System Preferences → General → "Close windows when quitting an app".
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
+
+
+
+
+
+
+
+
+# Purpose: Disables automatic termination of inactive apps.
+# Impact: Inactive apps will not be automatically terminated to save resources.
+# Location in GUI: This is a system-wide preference not directly exposed in the GUI.
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+
+# Purpose: Sets Help Viewer windows to non-floating mode.
+# Impact: Help Viewer windows will not float above other windows.
+# Location in GUI: No direct location in GUI settings.
+defaults write com.apple.helpviewer DevMode -bool true
+
+# Purpose: Reveal system information when clicking the clock in the login window.
+# Impact: IP address, hostname, OS version, and more will be displayed when clicking the clock at login.
+# Location in GUI: No direct location in GUI settings.
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+# Purpose: Sets the computer to restart if it freezes.
+# Impact: The computer will automatically restart if a system freeze is detected.
+# Location in GUI: System Preferences → Energy Saver → Power Adapter (or Battery) → "Restart automatically if the computer freezes".
+sudo systemsetup -setrestartfreeze on
+
+# Purpose: Prevents the computer from going into sleep mode.
+# Impact: The computer will never enter sleep mode automatically.
+# Location in GUI: System Preferences → Energy Saver → "Computer Sleep" slider set to "Never".
+sudo systemsetup -setcomputersleep Off > /dev/null
+
+# Purpose: Disables Notification Center and removes its icon from the menu bar.
+# Impact: Notification Center will be disabled and its menu bar icon hidden.
+# Location in GUI: No direct location in GUI settings.
+# ?
+launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+
+# Purpose: Sets a custom wallpaper image for the desktop.
+# Impact: The default desktop wallpaper will be replaced by a custom image.
+# Location in GUI: System Preferences → Desktop & Screen Saver → Desktop tab.
+rm -rf ~/Library/Application Support/Dock/desktoppicture.db
+sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
+sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Purpose: Enables full keyboard access for all controls, such as tabbing in modal dialogs.
+# Impact: Allows users to navigate UI elements using the keyboard.
+# Location in GUI: System Preferences → Keyboard → Shortcuts → "Use keyboard navigation to move focus between controls"
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
+
+# Purpose: Disables the press-and-hold action for keys and enables key repeat.
+# Impact: Holding down a key will result in key repetition instead of showing alternate characters.
+# Location in GUI: System Preferences → Keyboard → "Key Repeat"
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Purpose: Sets a faster keyboard repeat rate.
+# Impact: Keys will repeat at a faster rate when held down.
+# Location in GUI: System Preferences → Keyboard → "Key Repeat" and "Delay Until Repeat"
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+# Purpose: Enables tap to click for trackpad for the current user and the login screen.
+# Impact: Tapping on the trackpad will register as a click.
+# Location in GUI: System Preferences → Trackpad → Point & Click → "Tap to click"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Purpose: Enables three-finger drag gesture on the trackpad.
+# Impact: Users can drag windows and objects using a three-finger gesture.
+# Location in GUI: System Preferences → Trackpad → Point & Click → "Three finger drag"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
+
+# Purpose: Maps the bottom right corner of the trackpad to right-click.
+# Impact: Pressing on the bottom right corner of the trackpad will register as a right-click.
+# Location in GUI: System Preferences → Trackpad → Point & Click → "Secondary click"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+
+
+
+# Purpose: Disables “natural” (Lion-style) scrolling direction.
+# Impact: Scrolling direction will be reversed, moving the content in the same direction as the fingers.
+# Location in GUI: System Preferences → Trackpad → Scroll & Zoom → "Scroll direction: natural"
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+# Purpose: Increases sound quality for Bluetooth headphones and headsets.
+# Impact: Enhanced audio quality, but might affect stability with some devices.
+# Location in GUI: No
+defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+# Purpose: Enables the use of the scroll gesture combined with the Ctrl (^) modifier key to zoom.
+# Impact: Users can zoom in or out using the scroll gesture while holding down the Ctrl key.
+# Location in GUI: System Preferences → Accessibility → Zoom → "Use scroll gesture with modifier keys to zoom"
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+
+# Purpose: Makes the zoom feature follow the keyboard focus.
+# Impact: The zoom will adjust based on where the user is typing or interacting.
+# Location in GUI: System Preferences → Accessibility → Zoom → "Zoom follows the keyboard focus"
+defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+
+# Purpose: Sets language and text formats.
+# Impact: Changes the primary language and sets the currency, measurement units, etc.
+# Location in GUI: System Preferences → Language & Region
+defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
+defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=EUR"
+defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+
+# Purpose: Shows the language menu at the top right corner during the boot screen.
+# Impact: Users can choose a language before logging in.
+# Location in GUI: No
+sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
+
+# Purpose: Sets the computer's timezone.
+# Impact: Adjusts the system clock and all time-based operations to the set timezone.
+# Location in GUI: System Preferences → Date & Time → Time Zone
+sudo systemsetup -settimezone "Europe/Brussels" > /dev/null
+
+# Purpose: Prevents iTunes from responding to the media keys on the keyboard.
+# Impact: Media keys will not trigger iTunes actions.
+# Location in GUI: No
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+
+
+# Purpose: Enables full keyboard access for all controls, e.g., allowing the 'Tab' key to be used in modal dialogs.
+# Impact: Users can navigate through all interface controls using the keyboard.
+# Location in GUI: System Preferences → Keyboard → Shortcuts → "Full Keyboard Access"
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
+
+# Purpose: Disables the press-and-hold action for keys, enabling key repetition instead.
+# Impact: When a key is held down, it will repeat at a set interval instead of showing alternate characters.
+# Location in GUI: System Preferences → Keyboard → "Key Repeat"
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Purpose: Sets an extremely fast keyboard repeat rate.
+# Impact: The delay between repeated key presses is reduced significantly.
+# Location in GUI: System Preferences → Keyboard → "Key Repeat" & "Delay Until Repeat"
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+# Purpose: Enables tap to click for the user and the login screen.
+# Impact: Users can tap the trackpad to register a click, rather than physically pressing it.
+# Location in GUI: System Preferences → Trackpad → Point & Click → "Tap to click"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Purpose: Enables three-finger drag on the trackpad.
+# Impact: Allows users to move windows and select text using a three-finger drag gesture on the trackpad.
+# Location in GUI: System Preferences → Accessibility → Mouse & Trackpad → Trackpad Options → "Enable dragging"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
+
+# Purpose: Maps the bottom right corner of the trackpad to register a right-click.
+# Impact: Tapping the bottom right corner of the trackpad will produce a right-click/contextual menu action.
+# Location in GUI: System Preferences → Trackpad → Point & Click → "Secondary click"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+
+
+# Purpose: Disables "natural" (Lion-style) scrolling direction for trackpad and mouse.
+# Impact: Scrolling direction will be inverted; moving fingers up on the trackpad will scroll the content up.
+# Location in GUI: System Preferences → Trackpad → Scroll & Zoom → "Scroll direction: natural"
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+# Purpose: Improves sound quality for Bluetooth headphones and headsets.
+# Impact: The minimum bitpool value for Bluetooth audio is increased, potentially enhancing sound quality.
+# Location in GUI: No direct equivalent in GUI.
+
+arduino
+Copy code
+defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+# Purpose: Enables the use of the scroll gesture with the Ctrl (^) modifier key to zoom in and out.
+# Impact: Allows users to zoom in and out by scrolling while holding down the Ctrl key.
+# Location in GUI: System Preferences → Accessibility → Zoom → "Use scroll gesture with modifier keys to zoom"
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+
+# Purpose: Ensures that the zoom follows the keyboard focus.
+# Impact: The zoomed area will move to follow the text cursor or other focus point.
+# Location in GUI: System Preferences → Accessibility → Zoom → "Zoom follows the keyboard focus"
+defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+
+# Purpose: Sets the system language and text formats.
+# Impact: Changes the primary language and regional settings like currency and measurement units.
+# Location in GUI: System Preferences → Language & Region
+defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
+defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=EUR"
+defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+
+# Purpose: Displays the language menu in the top right corner of the login screen.
+# Impact: Allows users to switch input methods from the login screen.
+# Location in GUI: System Preferences → Users & Groups → Login Options
+sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
+
+# Purpose: Sets the system timezone.
+# Impact: Adjusts the computer's internal clock to the specified timezone.
+# Location in GUI: System Preferences → Date & Time → Time Zone
+sudo systemsetup -settimezone "Europe/Brussels" > /dev/null
+
+# Purpose: Stops iTunes from responding to the keyboard media keys.
+# Impact: Media keys on the keyboard will no longer control iTunes.
+# Location in GUI: No direct equivalent in GUI.
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+
+
+
+
+
+
+
+# ----------------------------------------
+
+
+
+
+
+
+# Purpose: Saves screenshots to the user's desktop.
+# Impact: Any screenshot taken will be saved directly to the desktop rather than any other location.
+# Location in GUI: No direct equivalent in GUI, but related to the screenshot shortcuts like Cmd + Shift + 3 or 4.
+defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+
+# Purpose: Sets the default format for screenshots to PNG.
+# Impact: Screenshots taken will be saved in the PNG format by default.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.screencapture type -string "png"
+
+# Purpose: Enables subpixel font rendering for non-Apple LCD displays.
+# Impact: Text will be rendered more crisply on third-party monitors.
+# Location in GUI: System Preferences → General → "Use LCD font smoothing when available".
+defaults write NSGlobalDomain AppleFontSmoothing -int 1
+
+# Purpose: Requires a password immediately after the computer goes to sleep or the screensaver starts.
+# Impact: Enhances security by asking for a password as soon as the screensaver starts or after waking from sleep.
+# Location in GUI: System Preferences → Security & Privacy → General → "Require password ... after sleep or screen saver begins".
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Purpose: Disables the shadow effect in screenshots.
+# Impact: Screenshots taken of windows will not include the window's shadow.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.screencapture disable-shadow -bool true
+
+# Purpose: Enables HiDPI display modes.
+# Impact: Allows the use of HiDPI modes for sharper text and images on supported displays. Requires a restart to take effect.
+# Location in GUI: System Preferences → Displays → Scaled (option might appear for compatible monitors after the command).
+sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+
+
+
+
+
+
+
+# --------------------------------
+#
+#
+#
+#
+## Purpose: Allows quitting the Finder via ⌘ + Q and hides desktop icons when done.
+# Impact: Users can quit the Finder using a keyboard shortcut, and the desktop icons will be hidden.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.finder QuitMenuItem -bool true
+
+# Purpose: Sets the Desktop as the default location for new Finder windows.
+# Impact: New Finder windows will open with the Desktop as the default location.
+# Location in GUI: Finder → Preferences → General → New Finder windows show: → Desktop.
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
+
+# Purpose: Configures which icons are shown on the desktop.
+# Impact: Only external hard drives and removable media will appear on the desktop.
+# Location in GUI: Finder → Preferences → General → Show these items on the desktop.
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+# Purpose: Displays hidden files by default in Finder.
+# Impact: All hidden files will be visible in Finder.
+# Location in GUI: No direct equivalent in GUI, but can be toggled in Finder with Cmd + Shift + ..
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Purpose: Shows all file name extensions in Finder.
+# Impact: File extensions will always be shown, regardless of individual file settings.
+# Location in GUI: Finder → Preferences → Advanced → Show all filename extensions.
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Purpose: Enables the status bar in Finder windows.
+# Impact: The status bar, showing file counts and available space, will be displayed at the bottom of Finder windows.
+# Location in GUI: Finder → View → Show Status Bar.
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Purpose: Enables the path bar in Finder windows.
+# Impact: The path bar, showing the directory path, will be displayed at the bottom of Finder windows.
+# Location in GUI: Finder → View → Show Path Bar.
+#
+defaults write com.apple.finder ShowPathbar -bool true
+# Purpose: Displays the full POSIX path as the title for Finder windows.
+# Impact: Finder window titles will show the complete directory path.
+# Location in GUI: No direct equivalent in GUI.
+#
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Purpose: Ensures folders are displayed first when sorting by name in Finder.
+# Impact: Folders will always appear at the top of lists when sorting by name.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# Purpose: Disables the warning popup when changing a file's extension in Finder.
+# Impact: Users can change file extensions without being warned about the change.
+# Location in GUI: Finder → Preferences → Advanced → Show warning before changing an extension.
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Purpose: Enables spring-loading for directories in Finder.
+# Impact: Directories in Finder will spring open when dragged over, facilitating easier dragging and dropping of items.
+# Location in GUI: Finder → Preferences → General → Spring-loaded folders and windows.
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+
+# Purpose: Adjusts the spring-loading delay for directories in Finder.
+# Impact: Directories in Finder will spring open more quickly (after 0.2 seconds) when dragged over.
+# Location in GUI: No direct equivalent in GUI.
+defaults write NSGlobalDomain com.apple.springing.delay -float 0.2
+
+# Purpose: Prevents the creation of .DS_Store files on network or USB volumes.
+# Impact: Finder will not create .DS_Store files on network shares or USB drives, which are often considered clutter by other systems.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Purpose: Automatically opens a new Finder window when a volume is mounted.
+# Impact: When a new disk volume (e.g., a USB drive) is mounted, a Finder window for that volume will automatically open.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+
+# Purpose: Enables snap-to-grid for icons on the desktop and other icon views in Finder.
+# Impact: Icons will align neatly to a grid, making the desktop and Finder windows appear more organized.
+# Location in GUI: Right-click on Desktop or Finder window → Show View Options → Arrange By: Grid.
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+# Purpose: Adjusts the grid spacing for icons on the desktop and other icon views in Finder.
+# Impact: Icons will have more space between them, potentially making them easier to differentiate and select.
+# Location in GUI: Right-click on Desktop or Finder window → Show View Options → Grid Spacing slider.
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 56" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 56" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 56" ~/Library/Preferences/com.apple.finder.plist
+
+
+# Purpose: Adjusts the size of icons on the desktop and in other icon views in Finder.
+# Impact: Icons will be larger, potentially making them easier to see and interact with.
+# Location in GUI: Right-click on Desktop or Finder window → Show View Options → Icon Size slider.
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 56" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 56" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 56" ~/Library/Preferences/com.apple.finder.plist
+
+# Purpose: Disables the warning prompt before emptying the Trash in Finder.
+# Impact: Users won't be prompted for confirmation when emptying the Trash, which may increase the risk of unintentional data loss.
+# Location in GUI: Finder → Preferences → Advanced → Show warning before emptying the Trash.
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Purpose: Enables AirDrop on unsupported Macs running Lion or over Ethernet.
+# Impact: AirDrop will be available on older Mac models or through Ethernet connections.
+# Location in GUI: No direct equivalent in GUI, but affects the availability of AirDrop in Finder.
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+
+# Purpose: Makes the ~/Library folder visible in Finder.
+# Impact: The user's Library folder will be easily accessible from Finder, which may increase the risk of unintentional changes.
+# Location in GUI: In Finder, hold down the Option key, then choose Go → Library.
+chflags nohidden ~/Library
+
+# Purpose: Makes the /Volumes folder visible in Finder.
+# Impact: The system's Volumes directory will be easily accessible from Finder, which may increase the risk of unintentional changes.
+# Location in GUI: No direct equivalent in GUI, but the folder can be accessed by navigating to /Volumes in Finder.
+sudo chflags nohidden /Volumes
+
+# Purpose: Shows an icon in the title bar.
+# Impact: An icon will be displayed in the title bar, providing additional context or decoration.
+# Location in GUI: Unknown specific location in GUI.
+defaults write com.apple.universalaccess "showWindowTitlebarIcons" -bool "true"
+
+# Purpose: Expands the "General", "Open with", and "Sharing & Permissions" sections in the Finder's Get Info window.
+# Impact: Users will see more detailed file information by default when checking file properties.
+# Location in GUI: Finder → File → Get Info.
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+  General -bool true \
+  OpenWith -bool true \
+  Privileges -bool true
+
+
+
+
+
+
+  # Purpose: Disables Finder's window and Get Info animations.
+# Impact: Reduces visual animations when using Finder, potentially speeding up interactions.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.finder DisableAllAnimations -bool true
+
+# Purpose: Sets the Desktop as the default location for new Finder windows.
+# Impact: When a new Finder window is opened, it will default to displaying the Desktop.
+# Location in GUI: Finder → Preferences → General → New Finder windows show.
+defaults write com.apple.finder NewWindowTarget -string "PfDe"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
+
+# Purpose: Sets Finder's default search location to the current folder.
+# Impact: When searching from a Finder window, it will default to searching only within the current folder, not the entire system.
+# Location in GUI: Finder → Preferences → Advanced → When performing a search.
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# Purpose: Enables "spring-loading" for directories in Finder.
+# Impact: Directories will automatically expand when dragged-over, after a delay.
+# Location in GUI: No direct equivalent in GUI, but relates to drag-and-drop behavior in Finder.
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+
+# Purpose: Disables verification for disk images in Finder.
+# Impact: Disk images will mount faster, but without verifying their integrity.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+
+# Purpose: Displays additional info near icons on the desktop and in other icon views in Finder.
+# Impact: Additional metadata (like file sizes or types) may be shown near file and folder icons.
+# Location in GUI: Right-click on Desktop or Finder window → Show View Options → Show item info.
+# ?
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+
+# Purpose: Aligns item info to the right of the icons on the desktop.
+# Impact: Changes the visual layout of the desktop, with labels positioned to the right of icons instead of below them.
+# Location in GUI: Right-click on Desktop → Show View Options → Label position.
+/usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
+
+# Purpose: Sets the default view for new Finder windows to "column" view.
+# Impact: New Finder windows will open with items arranged in columns, rather than as icons, lists, or in Cover Flow.
+# Location in GUI: Finder → View → As Columns.
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+# Purpose: Removes the green checkmark icons that Dropbox adds to files in Finder.
+# Impact: Files that are synced with Dropbox will no longer show the green checkmark overlay in Finder.
+# Location in GUI: This relates to Dropbox's integration with Finder and doesn't have a direct macOS GUI setting.
+file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
+[ -e "${file}" ] && mv -f "${file}" "${file}.bak"
+
+
+
+
+
+
+
+# Purpose: Enables highlight hover effect for the grid view of a stack in the Dock.
+# Impact: When you hover over items in a stack in grid view, they will be highlighted.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.dock mouse-over-hilite-stack -bool true
+
+# Purpose: Sets the icon size of Dock items.
+# Impact: Changes the size of icons in the Dock to 42 pixels.
+# Location in GUI: System Preferences → Dock → Size.
+defaults write com.apple.dock tilesize -int 42
+
+# Purpose: Changes the window minimization effect.
+# Impact: When minimizing, windows will use the "scale" effect instead of "genie" effect.
+# Location in GUI: System Preferences → Dock → Minimize windows using.
+defaults write com.apple.dock mineffect -string "scale"
+
+# Purpose: Minimizes windows into the application's icon on the Dock.
+# Impact: Instead of each window having its own spot on the Dock when minimized, they will collapse into their application's icon.
+# Location in GUI: System Preferences → Dock → Minimize windows into application icon.
+defaults write com.apple.dock minimize-to-application -bool true
+
+# Purpose: Enables spring loading for all Dock items.
+# Impact: You can drag items over Dock icons and after a delay, the application will open to let you drop the item within it.
+# Location in GUI: No direct equivalent in GUI, though related to dragging items on the Dock.
+defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
+
+# Purpose: Shows an indicator light beneath applications that are open.
+# Impact: Provides a visual cue for running applications.
+# Location in GUI: System Preferences → Dock → Show indicators for open applications.
+defaults write com.apple.dock show-process-indicators -bool true
+
+# Purpose: Disables the animation when opening applications from the Dock.
+# Impact: Applications open instantly without an animation.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.dock launchanim -bool false
+
+# Purpose: Speeds up the animation of entering and exiting Mission Control.
+# Impact: Makes entering/exiting Mission Control faster.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.dock expose-animation-duration -float 0.1
+
+# Purpose: Removes the delay before the Dock appears when set to auto-hide.
+# Impact: The Dock will instantly appear when you move your cursor to the edge of the screen where the Dock is located.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.dock autohide-delay -float 0
+
+# Purpose: Removes the animation of the Dock appearing and disappearing.
+# Impact: When the Dock shows or hides, it will do so instantly without an animation.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Purpose: Automatically hides the Dock unless the cursor is placed near it.
+# Impact: Maximizes screen real estate by hiding the Dock when not in use.
+# Location in GUI: System Preferences → Dock → Automatically hide and show the Dock.
+defaults write com.apple.dock autohide -bool true
+
+# Purpose: Makes the Dock icons of hidden applications translucent.
+# Impact: Provides a visual cue for applications that are running but are hidden.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.dock showhidden -bool true
+
+# Purpose: Sets the Dock to appear on the left side of the screen.
+# Impact: Changes the Dock's location to the left edge of the screen.
+# Location in GUI: System Preferences → Dock → Position on screen.
+defaults write com.apple.dock "orientation" -string "left"
+
+# Purpose: Does not display recent applications in the Dock.
+# Impact: Only actively running or pinned applications will show in the Dock.
+# Location in GUI: System Preferences → Dock → Show recent applications in Dock.
+defaults write com.apple.dock "show-recents" -bool "false"
+
+# Purpose: Sets actions for the four corners of the screen. When the cursor is moved to one of these corners, a specific action will trigger.
+# Impact: Provides quick access to certain features like Mission Control, Notification Center, putting the display to sleep, or showing the desktop.
+# Location in GUI: System Preferences → Mission Control → Hot Corners...
+# Setting hot corners for various actions:
+defaults write com.apple.dock wvous-tl-corner -int 2  # Top left → Mission control
+defaults write com.apple.dock wvous-tr-corner -int 12 # Top right → Notification Center
+defaults write com.apple.dock wvous-bl-corner -int 10 # Bottom left → Put display to sleep
+defaults write com.apple.dock wvous-br-corner -int 4  # Bottom right → Desktop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Purpose: Removes all default app icons from the Dock.
+# Impact: Clears the Dock of all app icons, useful for a clean start or a specific Dock setup.
+# Location in GUI: Manually removing each app from the Dock.
+# ?
+defaults write com.apple.dock persistent-apps -array
+
+# Purpose: Shows only currently open applications in the Dock.
+# Impact: The Dock will only display applications that are currently running.
+# Location in GUI: No direct equivalent in GUI.
+# ?
+defaults write com.apple.dock static-only -bool true
+
+# Purpose: Disables grouping of windows by their respective application in Mission Control.
+# Impact: Windows will be displayed individually in Mission Control, akin to the older Exposé behavior.
+# Location in GUI: System Preferences → Mission Control → Group windows by application.
+defaults write com.apple.dock expose-group-by-app -bool false
+
+# Purpose: Disables the Dashboard feature.
+# Impact: The Dashboard, a widget-based screen, will be turned off.
+# Location in GUI: No direct equivalent in newer macOS versions since Dashboard was phased out.
+defaults write com.apple.dashboard mcx-disabled -bool true
+
+# Purpose: Prevents Dashboard from being shown as its own space.
+# Impact: If Dashboard is enabled, it will overlay the current desktop instead of appearing as a separate space.
+# Location in GUI: No direct equivalent in newer macOS versions.
+# ?
+defaults write com.apple.dock dashboard-in-overlay -bool true
+
+# Purpose: Stops Spaces from automatically rearranging based on recent use.
+# Impact: The order of virtual desktops (Spaces) will remain static.
+# Location in GUI: System Preferences → Mission Control → Automatically rearrange Spaces based on most recent use.
+defaults write com.apple.dock mru-spaces -bool false
+
+# Purpose: Disables the Launchpad gesture.
+# Impact: Stops the Launchpad from being accessed by the pinch gesture using a thumb and three fingers.
+# Location in GUI: System Preferences → Trackpad → More Gestures → Launchpad.
+defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
+
+# Purpose: Resets the Launchpad layout while keeping the desktop wallpaper.
+# Impact: Returns Launchpad's layout to its default setting without affecting the desktop background.
+# Location in GUI: No direct equivalent in GUI. This manually clears out Launchpad databases.
+find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
+
+# Purpose: Adds the iOS & Watch Simulator to the Launchpad.
+# Impact: Creates symbolic links for the iOS and Watch Simulators in the Applications directory, making them accessible from Launchpad.
+# Location in GUI: No direct equivalent in GUI. This action manually creates links.
+sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
+sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
+
+# Purpose: Adds a spacer to the Dock's left side.
+# Impact: Inserts an empty space on the Dock's application side, which can be used for organizing icons.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+
+# Purpose: Adds a spacer to the Dock's right side.
+# Impact: Inserts an empty space on the Dock's side where files and the Trash are located.
+# Location in GUI: No direct equivalent in GUI.
+defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Purpose: Stops Time Machine from suggesting new hard drives as potential backup volumes.
+# Impact: Whenever you connect a new hard drive to your Mac, Time Machine won't automatically prompt you to use it as a backup disk. This can be helpful if you frequently connect new drives and don't want to be repeatedly prompted.
+# Location in GUI: There's no direct toggle for this in the Time Machine System Preferences pane, so the command provides a way to set this preference.
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+
+
+
+
+
+
+
+# Purpose: Ensures that the main window of Activity Monitor is displayed immediately upon application launch.
+# Impact: You don't have to manually open the main window every time you start Activity Monitor, making it more convenient for quick system performance checks.
+# Location in GUI: Not directly adjustable through Activity Monitor's graphical settings.
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+
+# Purpose: Changes the Activity Monitor's Dock icon to provide a real-time graph of CPU usage.
+# Impact: Allows a quick visual representation of CPU activity without needing to open the Activity Monitor app itself.
+# Location in GUI: This can be adjusted in Activity Monitor under View > Dock Icon > Show CPU Usage.
+defaults write com.apple.ActivityMonitor IconType -int 5
+
+# Purpose: Ensures that all processes, not just the ones by the current user, are displayed in Activity Monitor.
+# Impact: Provides a comprehensive view of all processes, assisting in identifying system or background tasks that might be impacting performance.
+# Location in GUI: This can be adjusted in Activity Monitor under View > All Processes.
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# Purpose: Prioritizes processes in Activity Monitor by their CPU usage, showing the most resource-intensive ones at the top.
+# Impact: Simplifies the process of identifying applications or tasks consuming significant CPU resources.
+# Location in GUI: You can adjust this in Activity Monitor by clicking on the "CPU" tab/column header, but the default sorting might reset. The command ensures it always starts with this sorting.
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Purpose: Enables macOS to check for software updates automatically.
+# Impact: Your system will automatically check for updates without you needing to do it manually. This ensures you're always aware of available updates, helping you maintain a more secure and updated system.
+# Location in GUI: This setting corresponds to "Automatically keep my Mac up to date" in System Preferences under Software Update.
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+
+# Purpose: Adjusts the frequency with which macOS checks for software updates.
+# Impact: Instead of the default once-per-week check, your system will now check for software updates daily, ensuring quicker awareness of newly available updates.
+# Location in GUI: While the automatic check can be toggled in System Preferences, the specific frequency (daily vs weekly) is not directly exposed in the GUI.
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# Purpose: Allows macOS to download software updates in the background as soon as they become available.
+# Impact: Enhances convenience by having updates ready to install without waiting for downloads. This can be particularly useful for large updates, as they can be downloaded at off-peak times.
+# Location in GUI: This setting corresponds to "Download new updates when available" in System Preferences under Software Update > Advanced.
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+
+
+
+
+
+
+
+
+
+
+
+# Purpose: Ensures that critical system data files and security updates are automatically installed.
+# Impact: This increases the security of your system by ensuring that important updates are installed as soon as they become available, without requiring manual intervention.
+# Location in GUI: This is similar to the "Install system data files and security updates" option in System Preferences under Software Update > Advanced.
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+
+# Purpose: Enables automatic updates for apps from the Mac App Store.
+# Impact: Applications you've installed from the Mac App Store will be updated automatically, ensuring you always have the latest versions without having to check manually.
+# Location in GUI: This setting corresponds to "Automatically update apps" in System Preferences under App Store.
+defaults write com.apple.commerce AutoUpdate -bool true
+
+# Purpose: Prevents the Mac App Store from automatically restarting your Mac after a macOS update.
+# Impact: This gives you control over when your Mac reboots after an update, which can be useful if you have ongoing tasks or open applications that you don't want to be interrupted. However, it also means you must remember to manually reboot when necessary.
+# Location in GUI: There's no direct toggle for this in the App Store System Preferences pane. Typically, macOS prompts before restarting, and this command ensures it always will.
+defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
