@@ -7,4 +7,5 @@ else
     require("samuherek.remap")
     require("samuherek.packer")
     require("samuherek.set")
+    require("samuherek.centered_vim")
 end
