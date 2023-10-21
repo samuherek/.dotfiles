@@ -266,7 +266,7 @@ while true; do
 
     case $app_defaults_answer in 
         [Yy]* )
-            local apps_path="./scripts/defaults/app.sh"
+            local apps_path="./scripts/defaults/apps.sh"
 
             # Check the existence of each script file
             if [ ! -f "$apps_path" ]; then
