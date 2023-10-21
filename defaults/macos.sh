@@ -10,6 +10,7 @@ defaults write com.apple.dock "show-recents" -bool "false"
 defaults write com.apple.dock "mineffect" -string "scale"
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock expose-animation-duration -float 0.1
+defaults write com.apple.dock persistent-apps -array
 
 # Screen
 defaults write com.apple.universalaccess reduceTransparency -bool true

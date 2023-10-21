@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GIT_ROOT=$(git rev-parse --show-toplevel)
+DOTFILES="$HOME/.dotfiles"
 
 stow_paths=(
     nvim
@@ -11,7 +11,7 @@ stow_paths=(
     zsh
 )
 
-pushd $GIT_ROOT
+pushd $DOTFILES
 for dir in "${stow_paths[@]}"; do
     echo "Stow $dir"
 

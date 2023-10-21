@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GIT_ROOT=$(git rev-parse --show-toplevel)
+DOTFILES="$HOME/.dotfiles"
 
 # Define the paths to the default scripts
 defaults_files=(
@@ -10,7 +10,7 @@ defaults_files=(
 
 # Check the existence of each script file
 for file in "${defaults_files[@]}"; do
-    file_path="$GIT_ROOT/defaults/$file"
+    file_path="$DOTFILES/defaults/$file"
     echo "PATH: $file_path"
 
     if [ ! -f "$file_path" ]; then
