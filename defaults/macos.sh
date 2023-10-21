@@ -74,8 +74,8 @@ defaults write com.apple.ActivityMonitor "IconType" -int "5"
 
 # Keyboard
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool "false"
-defaults write NSGlobalDomain InitialKeyRepeat -real 15
-defaults write NSGlobalDomain KeyRepeat -real 2
+defaults write NSGlobalDomain InitialKeyRepeat -real 10
+defaults write NSGlobalDomain KeyRepeat -real 1
 defaults write NSGlobalDomain com.apple.trackpad.scaling -float 1
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool false
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 0
