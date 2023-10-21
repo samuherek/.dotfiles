@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# This does not seem to work unless we disable the system integrity
+# for macOS. 
+# Creating spaces this way will create error.
+
 echo $(command -v yabai)
 echo $(command -v jq)
 

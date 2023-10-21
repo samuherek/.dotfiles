@@ -227,38 +227,6 @@ while true; do
 done 
 
 # -----------------------------------------
-# Ask to ensure we have 5 desktop spaces
-# -----------------------------------------
-while true; do
-    echo -n "Would you like to enxure we have 5 desktop spaces? [y/n]: "
-    read spaces_answer
-
-    case $spaces_answer in 
-        [Yy]* )
-            local spaces_path="./scripts/yabai/ensure_spaces.sh"
-
-            if [ ! -f "$spaces_path" ]; then
-                echo "Could not find $spaces_path. Please contact the maintainer."
-                exit 1
-            else
-                source "$spaces_path"
-                green "Desktop spaces synced."
-            fi
-
-            break
-            ;;
-        [Nn]* )
-            green "Skipping setting up desktop spaces."
-            break
-            ;;
-        * )
-            echo "Invalid answer. Please respond with 'y' or 'n'."
-            ;;
-    esac
-done 
-
-
-# -----------------------------------------
 # Ask to apply the macos general defaults
 # -----------------------------------------
 while true; do
@@ -292,8 +260,6 @@ done
 # -----------------------------------------
 # Ask to load app defaults
 # -----------------------------------------
-
-# Prompt user to load app defaults
 while true; do
     echo -n "Would you like to set apps defaults? [y/n]: "
     read app_defaults_answer
@@ -323,5 +289,77 @@ while true; do
             ;;
     esac
 done 
+
+# -----------------------------------------
+# Ask to stow config
+# -----------------------------------------
+while true; do
+    echo -n "Would you like to stow the config dotfiles? [y/n]: "
+    read stow_answer
+
+    case $stow_answer in 
+        [Yy]* )
+            local stow_path="./scipts/stow/init.sh"
+
+            # Check the existence of each script file
+            if [ ! -f "$stow_path" ]; then
+                echo "Error: the $stow_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$stow_path"
+                green "Config dotfiles stowed successfuly."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping stowing config dotfiles."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
+
+# -----------------------------------------
+# Ask to open apps that need configuration
+# Example:
+# - Brave Browser will need to be set as default
+# - Flux will need to load everything and set open at login
+# - ...
+# -----------------------------------------
+
+# Prompt user to load app defaults
+#while true; do
+ #   echo -n "Would you like to set apps defaults? [y/n]: "
+  #  read app_defaults_answer
+#
+ #   case $app_defaults_answer in 
+  #      [Yy]* )
+   #         local apps_path="./scipts/apps.sh"
+#
+ #           # Check the existence of each script file
+  #          if [ ! -f "$apps_path" ]; then
+   #             echo "Error: the $apps_path does not exist." 
+    #            echo "Contact the maintainer of the script to fix it."
+     #           exit 1
+      #      else 
+       #         source "$apps_path"
+        #        green "App defaults successfully loaded."
+         #   fi
+#
+ #           break
+  #          ;;
+   #     [Nn]* )
+    #        green "Skipping loading app defaults."
+     #       break
+      #      ;;
+       # * )
+        #    echo "Invalid answer. Please respond with 'y' or 'n'."
+         #   ;;
+ #   esac
+#done 
 
 

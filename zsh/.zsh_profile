@@ -3,3 +3,6 @@ VIM="nvim"
 
 
 export GIT_EDITOR=$VIM
+
+export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"

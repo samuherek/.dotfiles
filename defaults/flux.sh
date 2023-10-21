@@ -1,7 +1,7 @@
 #!/bin/bash
 
 defaults write org.herf.Flux darkTheme -bool true
-defaults write org.herf.Flux dayColorTemp -int 4200
+defaults write org.herf.Flux dayColorTemp -int 3700
 defaults write org.herf.Flux nightColorTemp -int 2600
 defaults write org.herf.Flux lateColorTemp -int 1600
 defaults write org.herf.Flux steptime -int 30
