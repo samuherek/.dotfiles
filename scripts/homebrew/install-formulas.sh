@@ -10,6 +10,7 @@ formulas=(
     koekeishiya/formulae/yabai
     tree-sitter
     jq
+    stow
 )
 
 is_formula_installede() {
