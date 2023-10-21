@@ -324,42 +324,68 @@ while true; do
 done 
 
 # -----------------------------------------
-# Ask to open apps that need configuration
-# Example:
-# - Brave Browser will need to be set as default
-# - Flux will need to load everything and set open at login
-# - ...
+# Ask to configure the base folder structure
 # -----------------------------------------
+while true; do
+    echo -n "Would you like to setup base directory structure? [y/n]: "
+    read dir_answer
 
-# Prompt user to load app defaults
-#while true; do
- #   echo -n "Would you like to set apps defaults? [y/n]: "
-  #  read app_defaults_answer
-#
- #   case $app_defaults_answer in 
-  #      [Yy]* )
-   #         local apps_path="./scipts/apps.sh"
-#
- #           # Check the existence of each script file
-  #          if [ ! -f "$apps_path" ]; then
-   #             echo "Error: the $apps_path does not exist." 
-    #            echo "Contact the maintainer of the script to fix it."
-     #           exit 1
-      #      else 
-       #         source "$apps_path"
-        #        green "App defaults successfully loaded."
-         #   fi
-#
- #           break
-  #          ;;
-   #     [Nn]* )
-    #        green "Skipping loading app defaults."
-     #       break
-      #      ;;
-       # * )
-        #    echo "Invalid answer. Please respond with 'y' or 'n'."
-         #   ;;
- #   esac
-#done 
+    case $dir_answer in 
+        [Yy]* )
+            local dir_path="./scipts/dir/init.sh"
 
+            # Check the existence of each script file
+            if [ ! -f "$dir_path" ]; then
+                echo "Error: the $dir_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$dir_path"
+                green "Directory structure created successfuly."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping directory structure creation."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
+
+# -----------------------------------------
+# Ask to run software updates 
+# -----------------------------------------
+while true; do
+    echo -n "Would you like to update the system apps? [y/n]: "
+    read sys_answer
+
+    case $sys_answer in 
+        [Yy]* )
+            local sys_path="./scipts/system/update_apps.sh"
+
+            # Check the existence of each script file
+            if [ ! -f "$sys_path" ]; then
+                echo "Error: the $sys_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$sys_path"
+                green "Sysmte update run successfuly."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping system update."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
 
