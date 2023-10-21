@@ -30,3 +30,10 @@ This repository is the root of all evil. It serves as a way to get my macos comp
 
 TODO:
 - Programatically switch the caps lock key to escape key
+
+- the reduce notion does not apply
+- the space hotkeys doen't apply
+- reduce transparency does not apply
+- there are some errors when applying defaults
+- abstract the stow folders so we can easily run clean env and init on stow with only one set of values
+- 
