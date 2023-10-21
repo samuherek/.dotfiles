@@ -22,6 +22,24 @@ Run the ansible palybooks....
 
 This repository is the root of all evil. It serves as a way to get my macos computer up to speed for development purposes. Which is every macocs computer I will most likely own :D. 
 
+1. Install xcode command line tools
+2. Install homebrew
+3. Install homebrew formulas
+4. Install homebrew casks
+5. Start skhd
+6. Start yabai
+7. Apply general OS defaults
+8. Apply app specific defaults
+9. Stow .dotfiles
+10. Create general folder structure
+11. Import ssh keys
+12. Open apps that need to be configured
+13. Ask to update apps and the operating system
+14. 
+
+
+
+
 todo:
 [ ] install brew
 - instal developer studd xcode
