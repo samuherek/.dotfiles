@@ -240,15 +240,15 @@ add_space_shotcut() {
 }
 
 # Desktop space 1 -> CMD + 1
-add_space_shortcut 118 49 18 1048576
+add_space_shotcut 118 49 18 1048576
 # Desktop space 2 -> CMD + 2
-add_space_shortcut 119 50 19 1048576
+add_space_shotcut 19 50 19 1048576
 # Desktop space 3 -> CMD + 3
-add_space_shortcut 120 51 20 1048576
+add_space_shotcut 120 51 20 1048576
 # Desktop space 4 -> CMD + 4
-add_space_shortcut 121 52 21 1048576
+add_space_shotcut 121 52 21 1048576
 # Desktop space 5 -> CMD + 5
-add_space_shortcut 122 53 23 1048576
+add_space_shotcut 122 53 23 1048576
 
 
 # Disable "Show Spotlight Search keyboard shortcut"

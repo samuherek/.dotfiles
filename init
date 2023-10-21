@@ -266,7 +266,7 @@ while true; do
 
     case $app_defaults_answer in 
         [Yy]* )
-            local apps_path="./scipts/apps.sh"
+            local apps_path="./scipts/defaults/app.sh"
 
             # Check the existence of each script file
             if [ ! -f "$apps_path" ]; then
@@ -299,7 +299,7 @@ while true; do
 
     case $stow_answer in 
         [Yy]* )
-            local stow_path="./scipts/stow/init.sh"
+            local stow_path="./scripts/stow/init.sh"
 
             # Check the existence of each script file
             if [ ! -f "$stow_path" ]; then
@@ -332,7 +332,7 @@ while true; do
 
     case $dir_answer in 
         [Yy]* )
-            local dir_path="./scipts/dir/init.sh"
+            local dir_path="./scripts/dir/init.sh"
 
             # Check the existence of each script file
             if [ ! -f "$dir_path" ]; then
@@ -365,7 +365,7 @@ while true; do
 
     case $sys_answer in 
         [Yy]* )
-            local sys_path="./scipts/system/update_apps.sh"
+            local sys_path="./scripts/system/update_apps.sh"
 
             # Check the existence of each script file
             if [ ! -f "$sys_path" ]; then
