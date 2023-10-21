@@ -3,13 +3,12 @@
 GIT_ROOT=$(git rev-parse --show-toplevel)
 
 # Define the paths to the default scripts
-defaults_files=(
-    macos.sh
-    hotkeys.sh
+defaults_apps=(
+    flux.sh
 )
 
 # Check the existence of each script file
-for file in "${defaults_files[@]}"; do
+for file in "${defaults_apps[@]}"; do
     file_path="$GIT_ROOT/defaults/$file"
     echo "PATH: $file_path"
 

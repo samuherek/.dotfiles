@@ -4,6 +4,7 @@ return {
     font_size = 16.0,
     enable_tab_bar = false,
     color_scheme = 'rose-pine-moon',
+    font = wezterm.font('JetBrains Mono', { weight = "Regular" }),
     window_decorations = "RESIZE",
     line_height = 1.1,
     window_padding = {

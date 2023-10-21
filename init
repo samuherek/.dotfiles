@@ -27,68 +27,31 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# -----------------
-# BASE INSTALATIONS 
-# -----------------
-
-# Install ecode stuff as we'll need it no matter what.
-if ! xcode-select --print-path &>/dev/null; then
-    echo "Installing Xcode Command Line Tools..."
-    xcode-select --install
-
-    # Wait until the Xcode Command Line Tools are installed
-    while ! xcode-select --print-path &>/dev/null; do
-        sleep 5
-    done
-
-    green "Xcode Command Line Tools installed."
-else
-    green "Xcode Command Line Tools already installed."
-fi
-
-# Check for Homebrew and install if not found
-if ! command -v brew &>/dev/null; then
-    echo "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-    # homebrew requires us to run this right after install in the next steps
-    # It could change in the future. periodically check if it is still up to date.
-    echo "Setting up homebrew paths"
-    shellenv_path="/Users/$(whoami)/.zprofile"
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $shellenv_path 
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-
-    green "Homebrew installed."
-else
-    green "Homebrew already installed."
-fi
-
-
 # -----------------------------------------
-# Ask to apply the macos general defaults
+# Ask to install xcode comand line tools
 # -----------------------------------------
-
-# Prompt user to apply the macOS defaults
 while true; do
-    echo -n "Would you like to apply the general defaults to macos settings? [y/n]: "
-    read defaults_answer
+    echo -n "Would you like to install xcode command line tools? [y/n]: "
+    read xcode_answer
 
-    case $defaults_answer in 
+    case $xcode_answer in 
         [Yy]* )
-            local defaults_path="./scripts/defaults/init.sh"
+            local xcode_path="./scripts/xcode/install.sh"
 
-            if [ ! -f "$defaults_path" ]; then
-                echo "Could not find $defaults_path. Please contact the maintainer."
+            # Check the existence of each script file
+            if [ ! -f "$xcode_path" ]; then
+                echo "Error: the $xcode_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
                 exit 1
-            else
-                source "$defaults_path"
-                green "macOS defaults applied. Make sure to restart your computer for them to take effect fully."
+            else 
+                source "$xcode_path"
+                green "XCode successfully installed."
             fi
 
             break
             ;;
         [Nn]* )
-            green "Skipping setting up macOS defaults."
+            green "Skipping installing xcode command line tools."
             break
             ;;
         * )
@@ -97,12 +60,42 @@ while true; do
     esac
 done 
 
+# -----------------------------------------
+# Ask to install homebrew 
+# -----------------------------------------
+while true; do
+    echo -n "Would you like to install homebrew? [y/n]: "
+    read brew_answer
+
+    case $brew_answer in 
+        [Yy]* )
+            local brew_path="./scripts/homebrew/install.sh"
+
+            # Check the existence of each script file
+            if [ ! -f "$brew_path" ]; then
+                echo "Error: the $formulas_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$brew_path"
+                green "Homebrew successfully installed."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping installing homebrew."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
 
 # -----------------------------------------
 # Ask to intall brew formulas 
 # -----------------------------------------
-
-# Prompt user to intall the formulas 
 while true; do
     echo -n "Would you like to install brew formulas? [y/n]: "
     read formulas_answer
@@ -137,8 +130,6 @@ done
 # -----------------------------------------
 # Ask to intall brew casks 
 # -----------------------------------------
-
-# Prompt user to intall the casks
 while true; do
     echo -n "Would you like to install brew casks? [y/n]: "
     read casks_answer
@@ -169,12 +160,42 @@ while true; do
     esac
 done 
 
+# -----------------------------------------
+# Ask to start skhd 
+# -----------------------------------------
+while true; do
+    echo -n "Would you like to start skhd? [y/n]: "
+    read skhd_answer
+
+    case $skhd_answer in 
+        [Yy]* )
+            local skhd_path="./scripts/skhd/init.sh"
+
+            # Check the existence of each script file
+            if [ ! -f "$skhd_path" ]; then
+                echo "Error: the $skhd_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$skhd_path"
+                green "skhd service started successfully."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping starting skhd."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
 
 # -----------------------------------------
 # Ask to start yabai 
 # -----------------------------------------
-
-# Prompt user to intall the casks
 while true; do
     echo -n "Would you like to start yabai? [y/n]: "
     read yabai_answer
@@ -205,34 +226,96 @@ while true; do
     esac
 done 
 
-
 # -----------------------------------------
-# Ask to start skhd 
+# Ask to ensure we have 5 desktop spaces
 # -----------------------------------------
-
-# Prompt user to intall the casks
 while true; do
-    echo -n "Would you like to start skhd? [y/n]: "
-    read yabai_answer
+    echo -n "Would you like to enxure we have 5 desktop spaces? [y/n]: "
+    read spaces_answer
 
-    case $yabai_answer in 
+    case $spaces_answer in 
         [Yy]* )
-            local yabai_path="./scripts/skhd/init.sh"
+            local spaces_path="./scripts/yabai/ensure_spaces.sh"
 
-            # Check the existence of each script file
-            if [ ! -f "$yabai_path" ]; then
-                echo "Error: the $yabai_path does not exist." 
-                echo "Contact the maintainer of the script to fix it."
+            if [ ! -f "$spaces_path" ]; then
+                echo "Could not find $spaces_path. Please contact the maintainer."
                 exit 1
-            else 
-                source "$yabai_path"
-                green "Yabai service started successfully."
+            else
+                source "$spaces_path"
+                green "Desktop spaces synced."
             fi
 
             break
             ;;
         [Nn]* )
-            green "Skipping starting skhd."
+            green "Skipping setting up desktop spaces."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
+
+
+# -----------------------------------------
+# Ask to apply the macos general defaults
+# -----------------------------------------
+while true; do
+    echo -n "Would you like to apply the general defaults to macos settings? [y/n]: "
+    read defaults_answer
+
+    case $defaults_answer in 
+        [Yy]* )
+            local defaults_path="./scripts/defaults/init.sh"
+
+            if [ ! -f "$defaults_path" ]; then
+                echo "Could not find $defaults_path. Please contact the maintainer."
+                exit 1
+            else
+                source "$defaults_path"
+                green "macOS defaults applied. Make sure to restart your computer for them to take effect fully."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping setting up macOS defaults."
+            break
+            ;;
+        * )
+            echo "Invalid answer. Please respond with 'y' or 'n'."
+            ;;
+    esac
+done 
+
+# -----------------------------------------
+# Ask to load app defaults
+# -----------------------------------------
+
+# Prompt user to load app defaults
+while true; do
+    echo -n "Would you like to set apps defaults? [y/n]: "
+    read app_defaults_answer
+
+    case $app_defaults_answer in 
+        [Yy]* )
+            local apps_path="./scipts/apps.sh"
+
+            # Check the existence of each script file
+            if [ ! -f "$apps_path" ]; then
+                echo "Error: the $apps_path does not exist." 
+                echo "Contact the maintainer of the script to fix it."
+                exit 1
+            else 
+                source "$apps_path"
+                green "App defaults successfully loaded."
+            fi
+
+            break
+            ;;
+        [Nn]* )
+            green "Skipping loading app defaults."
             break
             ;;
         * )

@@ -14,3 +14,4 @@ defaults write org.herf.Flux location -string "48.739460,19.153490"
 defaults write org.herf.Flux locationTextField -string "48.7,19.1"
 
 killall Flux &> /dev/null
+open -a Flux
