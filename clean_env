@@ -1,0 +1,27 @@
+#!/bin/bash
+
+DOTFILES="$HOME/.dotfiles"
+
+stow_paths=(
+    nvim
+    skhd
+    tmux
+    wezterm
+    yabai
+    zsh
+)
+
+pushd $DOTFILES
+for dir in "${stow_paths[@]}"; do
+    echo "Cleaning $dir"
+
+    if [ ! -d "$dir" ]; then
+        echo "Error: the $dir does not exist."
+        echo "Contact the mainter for the script to fix it."
+        #exit 1
+    else 
+        stow -D "$dir"
+    fi
+done
+popd
+
