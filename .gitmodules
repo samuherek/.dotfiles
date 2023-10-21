@@ -1,3 +1,0 @@
-[submodule "ssh-confg"]
-	path = ssh-confg
-	url = git@github.com:samuherek/.ssh-config.git
