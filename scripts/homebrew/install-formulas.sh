@@ -10,6 +10,7 @@ formulas=(
     koekeishiya/formulae/yabai
     tree-sitter
     jq
+    sqlite
     stow
 )
 
