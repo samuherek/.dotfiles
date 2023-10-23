@@ -21,6 +21,7 @@ casks=(
    synologyassistant
    synology-drive
    wezterm
+   keepingyouawake
 )
 
 is_cask_installed() {
