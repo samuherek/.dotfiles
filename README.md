@@ -37,4 +37,19 @@ TODO:
 - there are some errors when applying defaults
 - abstract the stow folders so we can easily run clean env and init on stow with only one set of values
 - Install the kinesis software so I can update keyboard if necessary. But only for the development machines not a laptop? https://kinesis-ergo.com/support/kb360/#smartset-app
-- 
+
+
+###`.ssh`
+Make sure to
+```
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/config
+chmod 600 ~/.ssh/my_custom_key
+```
+and here is a template for the ssh config:
+```
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/my_custom_key
+```
