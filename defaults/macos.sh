@@ -3,7 +3,7 @@
 
 # Dock
 defaults write com.apple.dock "orientation" -string "left"
-defaults write com.apple.dock "tilesize" -int "42"
+defaults write com.apple.dock "tilesize" -int "42" # -> works?
 defaults write com.apple.dock "autohide" -bool "true"
 defaults write com.apple.dock "autohide-time-modifier" -float "0.4"
 defaults write com.apple.dock "show-recents" -bool "false"
@@ -94,6 +94,8 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write com.apple.LaunchServices "LSQuarantine" -bool "false"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+# Scroll behavior
+defaults write -g AppleScrollerPagingBehavior -bool true # -> works
 
 # Print
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
