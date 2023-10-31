@@ -37,6 +37,8 @@ TODO:
 - there are some errors when applying defaults
 - abstract the stow folders so we can easily run clean env and init on stow with only one set of values
 - Install the kinesis software so I can update keyboard if necessary. But only for the development machines not a laptop? https://kinesis-ergo.com/support/kb360/#smartset-app
+- `git config --global user.email "email@email.com"` -> streemline config
+- `git config --global user.name "your name"` -> streemline config
 
 
 ###`.ssh`
