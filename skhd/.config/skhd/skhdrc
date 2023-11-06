@@ -155,6 +155,9 @@
 # cmd + alt - x : yabai -m space --focus recent
 cmd + alt - 1 : yabai -m space --focus 1
 
+# focus displays
+alt - o: yabai -m display --focus previous
+alt - i: yabai -m display --focus next
 
 # focus window
 alt - h : yabai -m window --focus west
