@@ -3,6 +3,7 @@
 DOTFILES="$HOME/.dotfiles"
 
 stow_paths=(
+    bin
     nvim
     skhd
     tmux

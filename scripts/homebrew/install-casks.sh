@@ -3,6 +3,7 @@
 echo "Installing apps with brew --cask"
 
 casks=(
+   alfred
    setapp
    google-chrome
    firefox
@@ -22,6 +23,7 @@ casks=(
    synology-drive
    wezterm
    keepingyouawake
+   postgres-unofficial
 )
 
 is_cask_installed() {
