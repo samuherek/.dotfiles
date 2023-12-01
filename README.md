@@ -42,6 +42,7 @@ TODO:
 - install rust `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
 - install nvm with `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash` and install latest node. We'll always need node for now.
 - Make a small script which is `so` that will do `source .zshrc`
+- add a keyboard shortcut for moving certain windows to different monitors
 
 ###`.ssh`
 Make sure to
