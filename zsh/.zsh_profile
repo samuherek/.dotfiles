@@ -19,3 +19,16 @@ PATH="$HOME/Library/Python/3.9/bin:$PATH"
 PATH="$PATH/Applications/Postgres.app/Contents/Versions/latest/bin:"
 
 export PATH
+
+# helper to quickly source zsh changes in the shell
+function so() {
+    source ~/.zsh_profile
+}
+
+# quick dir launcher 
+function f() {
+    local selected=$(bash quick_dir)
+    if [[ -n $selected ]]; then
+        cd "$selected"
+    fi
+}
