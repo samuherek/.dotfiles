@@ -33,7 +33,7 @@ is_cask_installed() {
 for cask in "${casks[@]}"; do
     echo "Check $cask before installation."
 
-    if is_cask_instaappsled "$cask"; then
+    if is_cask_installed "$cask"; then
         echo "$cask already isntalled."
     else 
         brew install --cask "$cask"

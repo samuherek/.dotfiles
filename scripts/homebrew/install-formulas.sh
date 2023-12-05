@@ -13,7 +13,7 @@ formulas=(
     stow
 )
 
-is_formula_installede() {
+is_formula_installed() {
     brew list 2> /dev/null | grep -wq "$1"
 }
 

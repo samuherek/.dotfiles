@@ -4,7 +4,18 @@ VIM="nvim"
 
 export GIT_EDITOR=$VIM
 
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.bin:$PATH"
-export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+# Not sure where this comes from 
+PATH="/usr/local/bin:$PATH"
+# this is rust related. They wated me to do this
+PATH="$HOME/.cargo/bin:$PATH"
+# This is personal bin scripts 
+PATH="$HOME/.bin:$PATH"
+# this is required byt the python3 virtualenv
+# I need to move this to the work related things intead of having this
+# in the global zhsrc.
+PATH="$HOME/Library/Python/3.9/bin:$PATH"
+# This seems to be required for the Postgres.app. Otherwise Python3
+# can not find the "pg_config" bin that is required for some packges.
+PATH="$PATH/Applications/Postgres.app/Contents/Versions/latest/bin:"
+
+export PATH
