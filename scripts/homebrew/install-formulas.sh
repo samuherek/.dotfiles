@@ -3,6 +3,7 @@
 echo "Installing apps with brew"
 
 formulas=(
+    fzf
     git
     tmux
     neovim
