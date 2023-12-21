@@ -13,7 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("samuherek.set")
-
 require('lazy').setup('plugins')
 
 vim.cmd('colorscheme rose-pine')

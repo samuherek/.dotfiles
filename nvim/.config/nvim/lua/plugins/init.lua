@@ -8,10 +8,10 @@ return {
     -- Rose pine color theme
     {
         'rose-pine/neovim',
-        -- as = 'rose-pine',
+        disable_italics = true,
+        name = 'rose-pine',
         -- variant = 'moon',
         -- dark_variant = 'moon',
-        -- disable_italics = true,
         -- groups = {
             --   comment = 'muted',
             --}
@@ -25,6 +25,7 @@ return {
                 'nvim-treesitter/nvim-treesitter-textobjects',
             }
         },
+        'L3MON4D3/LuaSnip',
         'nvim-treesitter/playground',
         'ThePrimeagen/harpoon',
         'mbbill/undotree',

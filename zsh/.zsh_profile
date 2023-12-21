@@ -32,3 +32,6 @@ function f() {
         cd "$selected"
     fi
 }
+
+# bind guick dir to ctrl+f
+bindkey -s ^f "f\n"
