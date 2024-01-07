@@ -13,9 +13,13 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 vim.keymap.set("n", "Q", "<nop>")
 
+local samuherek = vim.api.nvim_create_augroup("samuherek", {})
 
--- vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
--- vim.keymap.set('n', '<C-p>', builtin.git_files, {})
--- vim.keymap.set('n', '<leader>ps', function() 
--- 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
--- end)
+vim.api.nvim_create_autocmd('LSPAttach', {
+    group = samuherek,
+    callback = function(e)
+        local opts = { buffer = e.buf }
+        vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+        vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
+    end
+})
