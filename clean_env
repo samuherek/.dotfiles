@@ -4,6 +4,7 @@ DOTFILES="$HOME/.dotfiles"
 
 stow_paths=(
     bin
+    hammerspoon
     nvim
     skhd
     tmux
