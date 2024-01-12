@@ -16,13 +16,31 @@ PATH="$HOME/.bin:$PATH"
 PATH="$HOME/Library/Python/3.9/bin:$PATH"
 # This seems to be required for the Postgres.app. Otherwise Python3
 # can not find the "pg_config" bin that is required for some packges.
-PATH="$PATH/Applications/Postgres.app/Contents/Versions/latest/bin:"
+PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 export PATH
 
 # helper to quickly source zsh changes in the shell
 function so() {
     source ~/.zsh_profile
+}
+
+# copy absolute path to a file into clipboard
+function pwdc() {
+    local val="$1"     
+    if [ -z "$val" ]; then
+        echo "No file or directory specified."
+        return 0
+    fi
+
+    if [ -e "$val" ]; then
+        local value="$(pwd)/$val"
+        echo "copied $value"
+        echo "$value" | pbcopy
+    else 
+        echo "File or directory does not exist."
+        return 0
+    fi
 }
 
 # quick dir launcher 
