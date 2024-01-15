@@ -1,7 +1,7 @@
 return {
-    'ThePrimeagen/harpoon',   
+    'ThePrimeagen/harpoon',
     branch = "harpoon2",
-    config = function() 
+    config = function()
         local harpoon = require('harpoon')
 
         harpoon:setup()
