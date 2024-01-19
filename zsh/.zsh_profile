@@ -18,6 +18,9 @@ PATH="$HOME/Library/Python/3.9/bin:$PATH"
 # can not find the "pg_config" bin that is required for some packges.
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
+#Patht to loca ghi release
+PATH="$PATH:/Users/beatbox/personal/ghi/target/release"
+
 export PATH
 
 # helper to quickly source zsh changes in the shell
