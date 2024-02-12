@@ -29,6 +29,9 @@ This repository is the root of all evil. It serves as a way to get my macos comp
 [ ] software update macos and other internal tools. 'softwareupdate' 'sudo softwareupdate -i -a'
 
 TODO:
+[ ] make a small interactive CLI that will treplace the "init" for easy refresh of installs like homebrew formulas. 
+
+
 - Programatically switch the caps lock key to escape key
 
 - the reduce notion does not apply
