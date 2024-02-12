@@ -12,6 +12,8 @@ formulas=(
     tree-sitter
     jq
     stow
+    # rust
+    diesel
 )
 
 is_formula_installed() {

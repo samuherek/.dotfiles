@@ -14,7 +14,6 @@ casks=(
    spotify
    flux
    signal
-   fork
    hammerspoon
    protonvpn
    slack
