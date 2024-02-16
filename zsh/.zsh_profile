@@ -19,7 +19,7 @@ PATH="$HOME/Library/Python/3.9/bin:$PATH"
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 #Patht to loca ghi release
-PATH="$PATH:/Users/beatbox/personal/ghi/target/release"
+PATH="$PATH:$HOME/personal/ghi/target/release"
 
 export PATH
 
