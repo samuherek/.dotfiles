@@ -1,0 +1,11 @@
+STOW_PATHS=(
+    bin
+    hammerspoon
+    nvim
+    skhd
+    tmux
+    wezterm
+    yabai
+    zsh
+    ghi
+)

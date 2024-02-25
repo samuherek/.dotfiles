@@ -1,20 +1,10 @@
 #!/bin/bash
 
+source ../../stow_paths
 DOTFILES="$HOME/.dotfiles"
 
-stow_paths=(
-    bin
-    hammerspoon
-    nvim
-    skhd
-    tmux
-    wezterm
-    yabai
-    zsh
-)
-
 pushd $DOTFILES
-for dir in "${stow_paths[@]}"; do
+for dir in "${STOW_PATHS[@]}"; do
     echo "Stow $dir"
 
     if [ ! -d "$dir" ]; then
