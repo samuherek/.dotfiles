@@ -12,6 +12,7 @@ formulas=(
     tree-sitter
     jq
     stow
+    docker
     # rust
     diesel
 )
