@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DESKTOP_DIR="$HOME/desktop"
+DEST_DIR="$HOME/SynologyDrive/screenshots"
+
+mkdir -p "$DEST_DIR"
+
+find "$HOME/desktop" -type f -regex '.*Screen.*' -exec mv {} "$DEST_DIR" \;
