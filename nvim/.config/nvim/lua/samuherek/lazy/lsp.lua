@@ -39,11 +39,20 @@ return {
             }
         })
 
+
         vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "*.rs",
             callback = function()
                 vim.lsp.buf.format({ async = true })
             end,
+        })
+
+        vim.api.nvim_create_autocmd("LspAttach", {
+            group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+            callback = function (ev)
+                local opts = {buffer = ev.buf}
+                vim.keymap.set({'n', 'v'}, '<leader>f', vim.lsp.buf.code_action, opts)
+            end
         })
 
         local cmp = require'cmp'
