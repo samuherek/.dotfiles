@@ -39,6 +39,13 @@ return {
             }
         })
 
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = "*.rs",
+            callback = function()
+                vim.lsp.buf.format({ async = true })
+            end,
+        })
+
         local cmp = require'cmp'
         local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
