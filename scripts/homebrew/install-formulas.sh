@@ -15,6 +15,7 @@ formulas=(
     docker
     # rust
     diesel
+    just
 )
 
 is_formula_installed() {
