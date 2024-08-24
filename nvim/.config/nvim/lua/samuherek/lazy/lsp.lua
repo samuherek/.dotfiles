@@ -19,12 +19,14 @@ return {
                 'eslint',
                 'rust_analyzer',
                 'lua_ls',
+                'htmx',
+                'html'
             },
             handlers = {
-                function (server_name)
+                function(server_name)
                     require('lspconfig')[server_name].setup({})
                 end,
-                ["lua_ls"] = function ()
+                ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup({
                         settings = {
@@ -41,7 +43,7 @@ return {
 
 
         vim.api.nvim_create_autocmd("BufWritePre", {
-            pattern = "*.rs",
+            pattern = "*",
             callback = function()
                 vim.lsp.buf.format({ async = true })
             end,
@@ -49,14 +51,14 @@ return {
 
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-            callback = function (ev)
-                local opts = {buffer = ev.buf}
-                vim.keymap.set({'n', 'v'}, '<leader>f', vim.lsp.buf.code_action, opts)
+            callback = function(ev)
+                local opts = { buffer = ev.buf }
+                vim.keymap.set({ 'n', 'v' }, '<leader>f', vim.lsp.buf.code_action, opts)
             end
         })
 
-        local cmp = require'cmp'
-        local cmp_select = {behavior = cmp.SelectBehavior.Select}
+        local cmp = require 'cmp'
+        local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
             snippet = {
@@ -72,7 +74,7 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<C-y>'] = cmp.mapping.confirm({select = true}),
+                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
                 -- TODO: change to something else. I use C-Space for alfred
                 ['<C-Space>'] = cmp.mapping.complete(),
                 -- This is the old defaults from the git repo
