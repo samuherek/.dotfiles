@@ -1,0 +1,13 @@
+[user]
+	email = samuherekbiz@gmail.com
+	name = Sam Uherek
+
+[init]
+    defaultBranch = main
+
+[core]
+    pager = delta
+
+[delta]
+    line-numbers = true
+    side-by-side = true
