@@ -8,4 +8,5 @@ STOW_PATHS=(
     yabai
     zsh
     ghi
+    git
 )
