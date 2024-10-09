@@ -13,6 +13,7 @@ formulas=(
     jq
     stow
     docker
+    git-delta
     # rust
     diesel
     just
