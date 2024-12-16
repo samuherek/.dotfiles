@@ -13,13 +13,14 @@ PATH="$HOME/.bin:$PATH"
 # this is required byt the python3 virtualenv
 # I need to move this to the work related things intead of having this
 # in the global zhsrc.
-PATH="$HOME/Library/Python/3.9/bin:$PATH"
+PATH="$PATH:$HOME/Library/Python/3.9/bin"
 # This seems to be required for the Postgres.app. Otherwise Python3
 # can not find the "pg_config" bin that is required for some packges.
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
-#Patht to loca ghi release
+#Path to local dev project 
 PATH="$PATH:$HOME/personal/ghi/target/release"
+PATH="$PATH:$HOME/personal/dirpin/target/debug"
 
 export PATH
 
