@@ -84,7 +84,7 @@ return {
 				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 				-- TODO: change to something else. I use C-Space for alfred
-				["<Tab>"] = cmp.mapping.complete(),
+				["<C-y>"] = cmp.mapping.complete(),
 				-- This is the old defaults from the git repo
 				--['<C-b>'] = cmp.mapping.scroll_docs(-4),
 				--['<C-f>'] = cmp.mapping.scroll_docs(4),
