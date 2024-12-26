@@ -10,6 +10,7 @@ return {
 			typescript = { "prettier" },
 			typescriptreact = { "prettier" },
 			html = { "prettier" },
+			toml = { "taplo" },
 		},
 	},
 }
