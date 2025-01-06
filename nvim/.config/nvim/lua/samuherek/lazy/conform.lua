@@ -11,6 +11,7 @@ return {
 			typescriptreact = { "prettier" },
 			html = { "prettier" },
 			toml = { "taplo" },
+			dart = { "dart_format" },
 		},
 	},
 }
