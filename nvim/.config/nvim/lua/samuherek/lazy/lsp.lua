@@ -23,7 +23,8 @@ return {
 				"html",
 				"pyright",
 				"gopls",
-                "dartls",
+				"dartls",
+				"templ",
 			},
 			handlers = {
 				function(server_name)

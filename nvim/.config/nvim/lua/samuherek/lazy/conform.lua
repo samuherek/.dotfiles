@@ -12,6 +12,7 @@ return {
 			html = { "prettier" },
 			toml = { "taplo" },
 			dart = { "dart_format" },
+			go = { "gofmt" },
 		},
 	},
 }

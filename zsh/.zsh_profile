@@ -8,6 +8,8 @@ export GIT_EDITOR=$VIM
 PATH="/usr/local/bin:$PATH"
 # this is rust related. They wated me to do this
 PATH="$HOME/.cargo/bin:$PATH"
+# this is go related. They wated me to do this
+PATH="$(go env GOPATH)/bin:$PATH"
 # This is personal bin scripts 
 PATH="$HOME/.bin:$PATH"
 # this is required byt the python3 virtualenv
