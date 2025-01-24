@@ -7,5 +7,7 @@ return {
 			disable_italics = true,
 		})
 		vim.cmd("colorscheme rose-pine")
+		-- So that string values in HTML tags are whiteish instead
+		vim.cmd("hi @string.special guifg=#e0def4")
 	end,
 }
