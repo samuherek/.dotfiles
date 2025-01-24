@@ -13,6 +13,7 @@ return {
 			toml = { "taplo" },
 			dart = { "dart_format" },
 			go = { "gofmt" },
+			templ = { "templ" },
 		},
 	},
 }

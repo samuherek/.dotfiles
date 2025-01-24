@@ -17,6 +17,7 @@ return {
 				"html",
 				"css",
 				"dart",
+				"go",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
