@@ -14,6 +14,7 @@ return {
 	config = function()
 		require("mason").setup({})
 		-- vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+        require("lspconfig").dartls.setup{}
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"ts_ls",
@@ -23,7 +24,6 @@ return {
 				"html",
 				"pyright",
 				"gopls",
-				"dartls",
 				"templ",
 			},
 			handlers = {

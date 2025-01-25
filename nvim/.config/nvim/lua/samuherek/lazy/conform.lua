@@ -14,6 +14,7 @@ return {
 			dart = { "dart_format" },
 			go = { "gofmt" },
 			templ = { "templ" },
+            nginx = { "nginxfmt" },
 		},
 	},
 }
