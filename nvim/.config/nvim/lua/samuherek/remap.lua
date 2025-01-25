@@ -35,12 +35,6 @@ local function toggle_quickfix()
 	end
 end
 
-vim.keymap.set("n", "<leader>t", "", {
-	callback = function()
-		vim.notify("Hellow", vim.log.levels.ERROR)
-	end,
-})
-
 vim.keymap.set("n", "<leader>qe", "", {
 	noremap = true,
 	silent = true,

@@ -8,7 +8,7 @@ return {
 		require("telescope").setup({})
 
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>pf", function()
+		vim.keymap.set("n", "<leader>tf", function()
 			local find_cmd = { "rg", "--files", "--no-ignore", "--hidden" }
 			for _, dir in pairs(ignore_dirs) do
 				table.insert(find_cmd, "--glob")
@@ -19,11 +19,11 @@ return {
 			})
 		end)
 		vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-		vim.keymap.set("n", "<leader>gs", function()
+		vim.keymap.set("n", "<leader>ts", function()
 			builtin.grep_string({ search = vim.fn.input("Grep > ") })
 		end)
-		vim.keymap.set("n", "<leader>gg", builtin.grep_string, {})
-		vim.keymap.set("n", "<leader>gb", builtin.buffers, {})
-		vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
+		vim.keymap.set("n", "<leader>td", builtin.grep_string, {})
+		vim.keymap.set("n", "<leader>tb", builtin.buffers, {})
+		vim.keymap.set("n", "<leader>th", builtin.help_tags, {})
 	end,
 }

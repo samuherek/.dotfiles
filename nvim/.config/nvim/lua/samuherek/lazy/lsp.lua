@@ -14,7 +14,7 @@ return {
 	config = function()
 		require("mason").setup({})
 		-- vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
-        require("lspconfig").dartls.setup{}
+        require("lspconfig").dartls.setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"ts_ls",
@@ -57,10 +57,13 @@ return {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
 				local opts = { buffer = ev.buf }
-				vim.keymap.set({ "n", "v" }, "<leader>f", vim.lsp.buf.code_action, opts)
+				vim.keymap.set({ "n", "v" }, "<C-A>", vim.lsp.buf.code_action, opts)
 				vim.keymap.set("n", "gd", function()
 					vim.lsp.buf.definition()
 				end, opts)
+                vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
+                vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
+                vim.keymap.set("n", "<C-S>", vim.lsp.buf.signature_help, opts)
 				vim.keymap.set("n", "K", function()
 					vim.lsp.buf.hover()
 				end, opts)
@@ -72,14 +75,11 @@ return {
 
 		cmp.setup({
 			snippet = {
-				-- REQUIRED - you must specify a snippet engine
 				expand = function(args)
-					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+					require("luasnip").lsp_expand(args.body)
 				end,
 			},
 			window = {
-				-- completion = cmp.config.window.bordered(),
-				-- documentation = cmp.config.window.bordered(),
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
@@ -91,11 +91,10 @@ return {
 				--['<C-b>'] = cmp.mapping.scroll_docs(-4),
 				--['<C-f>'] = cmp.mapping.scroll_docs(4),
 				--['<C-e>'] = cmp.mapping.abort(),
-				--['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
-				{ name = "luasnip" }, -- For luasnip users.
+                { name = "luasnip" },
 			}, {
 				{ name = "buffer" },
 			}),
@@ -103,7 +102,6 @@ return {
 
 		vim.diagnostic.config({
 			update_in_insert = true,
-			-- No clue what this float business is
 			float = {
 				focusable = false,
 				style = "minimal",
