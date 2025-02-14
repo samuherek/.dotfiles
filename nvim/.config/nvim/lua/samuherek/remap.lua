@@ -61,3 +61,24 @@ vim.keymap.set("n", "<leader>qt", "", {
 		toggle_quickfix()
 	end,
 })
+
+local win_maximizer_active = false;
+local win_maximizer_view = {};
+
+local function win_maximizer_toggle()
+    if win_maximizer_active then
+        vim.fn.winrestview(win_maximizer_view)
+        vim.cmd("wincmd =")
+        win_maximizer_active = false
+    else
+        win_maximizer_view = vim.fn.winsaveview()
+        vim.cmd("wincmd _ | wincmd |")
+        win_maximizer_active= true
+    end
+end
+
+vim.keymap.set("n", "<C-w>f", "", {
+    noremap = true,
+    silent = true,
+    callback = win_maximizer_toggle
+})
