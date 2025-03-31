@@ -12,6 +12,8 @@ PATH="$HOME/.cargo/bin:$PATH"
 PATH="$(go env GOPATH)/bin:$PATH"
 # This is personal bin scripts 
 PATH="$HOME/.bin:$PATH"
+#Ruby shit
+PATH="$HOME/.rbenv/bin:$PATH"
 # this is required byt the python3 virtualenv
 # I need to move this to the work related things intead of having this
 # in the global zhsrc.
@@ -70,3 +72,10 @@ function in() {
 
 # bind guick dir to ctrl+f
 bindkey -s ^f "f\n"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#Ruby shit
+eval "$(rbenv init -)"
