@@ -54,6 +54,25 @@ vim.keymap.set("n", "<leader>qe", "", {
 	end,
 })
 
+vim.keymap.set("n", "<leader>qw", "", {
+	noremap = true,
+	silent = true,
+	callback = function()
+		vim.diagnostic.setqflist({
+			severity = vim.diagnostic.severity.WARN,
+			open = true,
+		})
+		-- vim.cmd("copen")
+		local windows = vim.fn.getwininfo()
+		for _, win in ipairs(windows) do
+			if win["quickfix"] == 1 then
+				vim.api.nvim_set_current_win(win.winid)
+				break
+			end
+		end
+	end,
+})
+
 vim.keymap.set("n", "<leader>qt", "", {
 	noremap = true,
 	silent = true,
