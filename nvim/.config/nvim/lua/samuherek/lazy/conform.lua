@@ -10,11 +10,19 @@ return {
 			typescript = { "prettier" },
 			typescriptreact = { "prettier" },
 			html = { "prettier" },
+            json = { "prettier_two" },
 			toml = { "taplo" },
 			dart = { "dart_format" },
 			go = { "gofmt" },
 			templ = { "templ" },
             nginx = { "nginxfmt" },
 		},
+        formatters = {
+            prettier_two = {
+                command = "prettier",
+                args = { "--stdin-filepath", "$FILENAME", "--tab-width", "2" },
+                stdin = true,
+            },
+        }
 	},
 }
