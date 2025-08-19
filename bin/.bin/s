@@ -44,6 +44,7 @@ create_or_attach_tmux_session() {
     else
         # If no configuration file, create a second default window
         tmux new-window -t "$session_name" -c "$current_dir"
+        tmux select-window -t "${session_Name}:0"
     fi
         # Attach to the newly created session
         tmux attach-session -t "$session_name"

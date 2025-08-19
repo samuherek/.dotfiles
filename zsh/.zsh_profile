@@ -51,14 +51,6 @@ function pwdc() {
     fi
 }
 
-# quick dir launcher 
-function f() {
-    local selected=$(bash quick_dir)
-    if [[ -n $selected ]]; then
-        cd "$selected"
-    fi
-}
-
 # Quick nav into a dir in a monorepo like app
 # Currently testing if this is useful
 function in() {
@@ -70,8 +62,30 @@ function in() {
     fi
 }
 
-# bind guick dir to ctrl+f
-bindkey -s ^f "f\n"
+# ZLE widget: quick directory navigation
+quick-dir-widget() {
+  local selected
+  selected=$(quick_dir) || return
+  [[ -z $selected ]] && return
+  if [[ -d $selected ]]; then
+    builtin cd -- "$selected"
+    zle reset-prompt
+  else
+    zle -M "Not a directory: $selected"
+  fi
+}
+zle -N quick-dir-widget
+bindkey '^F' quick-dir-widget
+
+# ZLE widget: pick a command from your zsh history with fzf, insert at cursor
+h-widget() {
+  local cmd
+  # fc -ln 1 = list history with no numbers, from entry 1
+  cmd=$(fc -ln 1 | awk '!seen[$0]++' | fzf) || return
+  LBUFFER+="$cmd"
+}
+zle -N h-widget
+bindkey '^H' h-widget
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
