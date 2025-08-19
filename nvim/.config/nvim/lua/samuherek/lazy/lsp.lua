@@ -14,7 +14,7 @@ return {
 	config = function()
 		require("mason").setup({})
 		-- vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
-        require("lspconfig").dartls.setup({})
+		require("lspconfig").dartls.setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"ts_ls",
@@ -25,6 +25,7 @@ return {
 				"pyright",
 				"gopls",
 				"templ",
+				"clangd",
 			},
 			handlers = {
 				function(server_name)
@@ -61,9 +62,9 @@ return {
 				vim.keymap.set("n", "gd", function()
 					vim.lsp.buf.definition()
 				end, opts)
-                vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
-                vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
-                vim.keymap.set("n", "<C-S>", vim.lsp.buf.signature_help, opts)
+				vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
+				vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
+				vim.keymap.set("n", "<C-S>", vim.lsp.buf.signature_help, opts)
 				vim.keymap.set("n", "K", function()
 					vim.lsp.buf.hover()
 				end, opts)
@@ -79,8 +80,7 @@ return {
 					require("luasnip").lsp_expand(args.body)
 				end,
 			},
-			window = {
-			},
+			window = {},
 			mapping = cmp.mapping.preset.insert({
 				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
@@ -94,7 +94,7 @@ return {
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
-                { name = "luasnip" },
+				{ name = "luasnip" },
 			}, {
 				{ name = "buffer" },
 			}),

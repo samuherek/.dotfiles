@@ -15,7 +15,8 @@ return {
 			dart = { "dart_format" },
 			go = { "gofmt" },
 			templ = { "templ" },
-            nginx = { "nginxfmt" },
+			nginx = { "nginxfmt" },
+			css = { "prettier" },
 		},
         formatters = {
             prettier_two = {
