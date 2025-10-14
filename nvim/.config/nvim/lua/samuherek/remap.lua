@@ -109,3 +109,11 @@ end, { desc = "Next diagnostic" })
 vim.keymap.set("n", "<leader>p", function()
 	vim.diagnostic.goto_prev({ wrap = true })
 end, { desc = "Previous diagnostic" })
+
+-- Reloading neovim config from within the opened session
+vim.keymap.set("n", "<leader>so", function()
+	local reload = require("plenary.reload").reload_module
+	reload("samuherek")
+	dofile(vim.env.MYVIMRC)
+	print("Config reloaded")
+end)
