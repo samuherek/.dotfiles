@@ -59,6 +59,10 @@ return {
 			callback = function(ev)
 				local opts = { buffer = ev.buf }
 				vim.keymap.set({ "n", "v" }, "<C-A>", vim.lsp.buf.code_action, opts)
+				vim.keymap.set("n", "gD", function()
+					vim.cmd("split")
+					vim.lsp.buf.definition()
+				end, vim.tbl_extend("force", opts, { noremap = true, silent = true }))
 				vim.keymap.set("n", "gd", function()
 					vim.lsp.buf.definition()
 				end, opts)
