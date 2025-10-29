@@ -26,7 +26,9 @@ return {
 			local dir = vim.fn.expand("%:p")
 			builtin.grep_string({ cwd = dir, search = vim.fn.input("Grep dir > ") })
 		end, {})
-		vim.keymap.set("n", "<leader>td", builtin.grep_string, {})
+		vim.keymap.set("n", "<leader>tr", builtin.lsp_references, {})
+		vim.keymap.set("n", "<leader>te", builtin.lsp_document_symbols, {})
+		vim.keymap.set("n", "<leader>tw", builtin.grep_string, {})
 		vim.keymap.set("n", "<leader>tb", builtin.buffers, {})
 		vim.keymap.set("n", "<leader>th", builtin.help_tags, {})
 	end,
