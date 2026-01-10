@@ -92,7 +92,7 @@ local function run_vet_now()
 	})
 end
 
-local run_vet = debounce(run_vet_now, 1000)
+local run_vet = debounce(run_vet_now, 300)
 
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufEnter" }, {
 	pattern = "*.go",

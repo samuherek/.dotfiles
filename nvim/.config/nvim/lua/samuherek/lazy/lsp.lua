@@ -12,9 +12,13 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 	},
 	config = function()
+		vim.lsp.config("*", {
+			flags = {
+				debounce_text_changes = 150,
+			},
+		})
 		require("mason").setup({})
 		-- vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
-		require("lspconfig").dartls.setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"ts_ls",
@@ -27,31 +31,35 @@ return {
 				"templ",
 				"clangd",
 			},
-			handlers = {
-				function(server_name)
-					require("lspconfig")[server_name].setup({})
-				end,
-				["rust_analyzer"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.rust_analyzer.setup({
-						settings = {
-							checkOnSave = { command = "clippy" },
-						},
-					})
-				end,
-				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.lua_ls.setup({
-						settings = {
-							Lua = {
-								diagnostics = {
-									globals = { "vim" },
-								},
-							},
-						},
-					})
-				end,
+		})
+
+		vim.lsp.config("rust_analyzer", {
+			settings = {
+				checkOnSave = { command = "clippy" },
 			},
+		})
+
+		vim.lsp.config("lua_ls", {
+			settings = {
+				Lua = {
+					diagnostics = {
+						globals = { "vim" },
+					},
+				},
+			},
+		})
+
+		vim.lsp.enable({
+			"ts_ls",
+			"rust_analyzer",
+			"lua_ls",
+			"htmx",
+			"html",
+			"pyright",
+			"gopls",
+			"templ",
+			"clangd",
+			"dartls",
 		})
 
 		vim.api.nvim_create_autocmd("LspAttach", {
