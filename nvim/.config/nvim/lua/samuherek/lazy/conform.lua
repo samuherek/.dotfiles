@@ -23,6 +23,10 @@ return {
 			nginx = { "nginxfmt" },
 			css = { "prettier" },
 			sql = { "sqruff" },
+			hcl = { "packer_fmt" },
+			terraform = { "terraform_fmt" },
+			tf = { "terraform_fmt" },
+			["terraform-vars"] = { "terraform_fmt" },
 		},
 		formatters = {
 			prettier_two = {

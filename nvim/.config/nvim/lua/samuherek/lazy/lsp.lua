@@ -30,6 +30,7 @@ return {
 				"gopls",
 				"templ",
 				"clangd",
+				"terraformls",
 			},
 		})
 
@@ -60,6 +61,7 @@ return {
 			"templ",
 			"clangd",
 			"dartls",
+			"terraformls",
 		})
 
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -114,6 +116,7 @@ return {
 
 		vim.diagnostic.config({
 			update_in_insert = true,
+			virtual_text = true,
 			float = {
 				focusable = false,
 				style = "minimal",

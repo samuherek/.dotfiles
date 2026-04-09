@@ -18,6 +18,8 @@ return {
 				"css",
 				"dart",
 				"go",
+				"terraform",
+				"hcl",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
