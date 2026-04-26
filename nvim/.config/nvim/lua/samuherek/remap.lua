@@ -117,3 +117,8 @@ vim.keymap.set("n", "<leader>so", function()
 	dofile(vim.env.MYVIMRC)
 	print("Config reloaded")
 end)
+
+vim.keymap.set("n", "<leader>s", function()
+	local api = require("supermaven-nvim.api")
+	api.toggle()
+end, { desc = "Toggle supermaven" })
