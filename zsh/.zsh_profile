@@ -2,7 +2,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 
 # Let's set colored prompt
-PS1='%F{blue}%n@%m%f %F{cyan}%2~%f %# '
+PS1='%F{blue}%n@%m%f %F{cyan}%1~%f %# '
 
 export EDITOR=$VIM
 export GIT_EDITOR=$VIM
