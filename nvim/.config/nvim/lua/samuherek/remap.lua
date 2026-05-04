@@ -1,13 +1,13 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "netwr Explorer" })
 
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Ctrl+d and center" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Ctrl+u and center" })
 
-vim.keymap.set("x", "<leader>p", '"_dP')
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without indent" })
 
-vim.keymap.set("n", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
 vim.keymap.set("n", "<leader>Y", '"+Y')
 
 vim.keymap.set("n", "Q", "<nop>")
@@ -38,6 +38,7 @@ end
 vim.keymap.set("n", "<leader>qe", "", {
 	noremap = true,
 	silent = true,
+	desc = "Toggle quickfix errors",
 	callback = function()
 		vim.diagnostic.setqflist({
 			severity = vim.diagnostic.severity.ERROR,
@@ -57,6 +58,7 @@ vim.keymap.set("n", "<leader>qe", "", {
 vim.keymap.set("n", "<leader>qw", "", {
 	noremap = true,
 	silent = true,
+	desc = "Toggle quickfix warnings",
 	callback = function()
 		vim.diagnostic.setqflist({
 			severity = vim.diagnostic.severity.WARN,
@@ -73,9 +75,10 @@ vim.keymap.set("n", "<leader>qw", "", {
 	end,
 })
 
-vim.keymap.set("n", "<leader>qt", "", {
+vim.keymap.set("n", "<leader>qq", "", {
 	noremap = true,
 	silent = true,
+	desc = "Toggle quickfix",
 	callback = function()
 		toggle_quickfix()
 	end,
@@ -96,11 +99,16 @@ local function win_maximizer_toggle()
 	end
 end
 
-vim.keymap.set("n", "<C-w>f", "", {
+vim.keymap.set("n", "<leader>wf", "", {
 	noremap = true,
 	silent = true,
+	desc = "Toggle window maximizer",
 	callback = win_maximizer_toggle,
 })
+
+-- Split and focus on new split
+vim.keymap.set("n", "<leader>wv", "<C-w>v<C-w>l", { desc = "Window :vsp and focus" })
+vim.keymap.set("n", "<leader>ws", "<C-w>s<C-w>j", { desc = "Window :sp and focus" })
 
 -- Move around lint errors with looping in a buffer
 vim.keymap.set("n", "<leader>n", function()
@@ -116,9 +124,4 @@ vim.keymap.set("n", "<leader>so", function()
 	reload("samuherek")
 	dofile(vim.env.MYVIMRC)
 	print("Config reloaded")
-end)
-
-vim.keymap.set("n", "<leader>s", function()
-	local api = require("supermaven-nvim.api")
-	api.toggle()
-end, { desc = "Toggle supermaven" })
+end, { desc = "Reload config" })

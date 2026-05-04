@@ -68,20 +68,20 @@ return {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
 				local opts = { buffer = ev.buf }
-				vim.keymap.set({ "n", "v" }, "<C-A>", vim.lsp.buf.code_action, opts)
+				vim.keymap.set({ "n", "v" }, "<C-A>", vim.lsp.buf.code_action, opts, { desc = "Code actions" })
 				vim.keymap.set("n", "gD", function()
 					vim.cmd("split")
 					vim.lsp.buf.definition()
 				end, vim.tbl_extend("force", opts, { noremap = true, silent = true }))
 				vim.keymap.set("n", "gd", function()
 					vim.lsp.buf.definition()
-				end, opts)
-				vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
-				vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
-				vim.keymap.set("n", "<C-S>", vim.lsp.buf.signature_help, opts)
+				end, opts, { desc = "Go to definition" })
+				vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts, { desc = "Rename" })
+				vim.keymap.set("n", "grr", vim.lsp.buf.references, opts, { desc = "References" })
+				vim.keymap.set("n", "<C-S>", vim.lsp.buf.signature_help, opts, { desc = "Signature help" })
 				vim.keymap.set("n", "K", function()
 					vim.lsp.buf.hover()
-				end, opts)
+				end, opts, { desc = "Hover" })
 			end,
 		})
 
