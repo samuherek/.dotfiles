@@ -75,7 +75,7 @@ vim.keymap.set("n", "<leader>qw", "", {
 	end,
 })
 
-vim.keymap.set("n", "<leader>qq", "", {
+vim.keymap.set("n", "<leader>qt", "", {
 	noremap = true,
 	silent = true,
 	desc = "Toggle quickfix",
