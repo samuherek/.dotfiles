@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "netwr Explorer" })
+-- vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "netwr Explorer" })
+vim.keymap.set("n", "<leader>e", function()
+	require("oil").open()
+end, { desc = "Oil Explorer" })
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Ctrl+d and center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Ctrl+u and center" })

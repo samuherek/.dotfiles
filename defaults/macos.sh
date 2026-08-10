@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Get rid of the annoying border radious in the new macOS !!!!!!!!!!!
+# experimental and if it stops working it's because they changed it to something else 
+defaults write -g NSConvolutionOverride1 -float 10
 
 # Dock
 defaults write com.apple.dock "orientation" -string "left"
