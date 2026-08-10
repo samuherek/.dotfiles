@@ -1,6 +1,4 @@
 PLATFORM="macos"
-ROLES="base developer workstation"
+ROLES="base server headless"
 
-HOST_MODULES_SHARED="zsh"
-HOST_MODULES_MACOS=""
-HOST_SYSTEM_MACOS="defaults hotkeys"
+HOST_STOW=""

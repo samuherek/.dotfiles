@@ -52,4 +52,18 @@ else
     echo "Homebrew already installed."
 fi
 
+DOTFILES_DIR="$HOME/.dotfiles"
+DOTFILES_REPO="https://github.com/samuherek/.dotfiles"
+
+if [ -d "$DOTFILES_DIR" ]; then
+    echo ".dotfiles already exists. Skipping clone."
+else
+    echo "Cloning .dotfiles into $DOTFILES_DIR..."
+    git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
+    echo ".dotfiles cloned successfully."
+fi
+
+echo "Now run:"
+echo "cd ~/.dotfiles"
+echo "./runner/run.sh apply"
 

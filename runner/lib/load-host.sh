@@ -10,10 +10,7 @@ load_host() {
     PLATFORM=""
     ROLES=""
 
-    HOST_MODULES_SHARED=""
-    HOST_MODULES_MACOS=""
-    HOST_MODULES_LINUX=""
-    HOST_MODULES_NAS=""
+    HOST_STOW=""
 
     source "$host_file"
 
