@@ -11,6 +11,7 @@ source "$RUNNER_DIR/lib/load-host.sh"
 source "$RUNNER_DIR/lib/load-roles.sh"
 source "$RUNNER_DIR/lib/apply-stow.sh"
 source "$RUNNER_DIR/lib/apply-packages.sh"
+source "$RUNNER_DIR/lib/apply-defaults.sh"
 source "$RUNNER_DIR/lib/state.sh"
 
 help_command() {
@@ -23,6 +24,8 @@ Commands:
   host           Show current stored host name
   apply          Install packages and apply stow using stored host, or prompt if none exists
   apply <host>   Install packages and apply stow using the given host
+  defaults       Apply defaults only using stored host, or prompt if none exists
+  defaults <host> Apply defaults only using the given host
   install        Install packages only using stored host, or prompt if none exists
   install <host> Install packages only using the given host
   stow           Apply stow only using stored host, or prompt if none exists
@@ -75,6 +78,20 @@ resolve_final_packages() {
     esac
 }
 
+resolve_final_defaults() {
+    case "$PLATFORM" in
+        macos)
+            FINAL_DEFAULTS="$(merge_lists "$ROLE_DEFAULT_GROUPS" "$HOST_DEFAULT_GROUPS_MACOS")"
+            ;;
+        linux|nas)
+            FINAL_DEFAULTS=""
+            ;;
+        *)
+            fail "unsupported platform: $PLATFORM"
+            ;;
+    esac
+}
+
 load_host_config() {
     HOST_NAME="$(resolve_host_name "${1:-}")"
 
@@ -82,6 +99,7 @@ load_host_config() {
     load_roles "$DOTFILES_ROOT" "$PLATFORM" "$ROLES"
     resolve_final_stow
     resolve_final_packages
+    resolve_final_defaults
 }
 
 print_apply_summary() {
@@ -89,6 +107,7 @@ print_apply_summary() {
     printf 'Platform: %s\n' "$PLATFORM"
     printf 'Roles: %s\n' "$ROLES"
     printf 'Packages: %s\n' "$FINAL_PACKAGES"
+    printf 'Defaults: %s\n' "$FINAL_DEFAULTS"
     printf 'Stow: %s\n' "$FINAL_STOW"
 }
 
@@ -97,11 +116,23 @@ apply_command() {
 
     load_state
     apply_packages "$FINAL_PACKAGES"
+    apply_defaults "$FINAL_DEFAULTS"
     apply_stow "$STATE_STOW" "$FINAL_STOW"
 
     print_apply_summary
 
-    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$FINAL_PACKAGES"
+    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$FINAL_PACKAGES" "$FINAL_DEFAULTS"
+}
+
+defaults_command() {
+    load_host_config "${1:-}"
+
+    load_state
+    apply_defaults "$FINAL_DEFAULTS"
+
+    print_apply_summary
+
+    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$STATE_PACKAGES" "$FINAL_DEFAULTS"
 }
 
 install_command() {
@@ -112,7 +143,7 @@ install_command() {
 
     print_apply_summary
 
-    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$FINAL_PACKAGES"
+    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$FINAL_PACKAGES" "$STATE_DEFAULTS"
 }
 
 stow_command() {
@@ -123,7 +154,7 @@ stow_command() {
 
     print_apply_summary
 
-    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$STATE_PACKAGES"
+    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$STATE_PACKAGES" "$STATE_DEFAULTS"
 }
 
 status_command() {
@@ -136,6 +167,7 @@ status_command() {
     printf 'Host: %s\n' "$STATE_HOST_NAME"
     printf 'Platform: %s\n' "$STATE_PLATFORM"
     printf 'Packages: %s\n' "$STATE_PACKAGES"
+    printf 'Defaults: %s\n' "$STATE_DEFAULTS"
     printf 'Stow: %s\n' "$STATE_STOW"
 }
 
@@ -160,6 +192,9 @@ shift
 case "$COMMAND" in
     apply)
         apply_command "${1:-}"
+        ;;
+    defaults)
+        defaults_command "${1:-}"
         ;;
     install)
         install_command "${1:-}"

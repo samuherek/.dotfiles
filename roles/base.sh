@@ -8,3 +8,4 @@ ROLE_STOW_LINUX=""
 ROLE_STOW_NAS=""
 
 ROLE_PACKAGE_GROUPS_MACOS="dotfiles terminal security"
+ROLE_DEFAULT_GROUPS_MACOS="ui finder software keyboard misc kill-apps"

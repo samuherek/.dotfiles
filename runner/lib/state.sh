@@ -8,6 +8,7 @@ load_state() {
     STATE_PLATFORM=""
     STATE_STOW=""
     STATE_PACKAGES=""
+    STATE_DEFAULTS=""
 
     if [ -f "$STATE_FILE" ]; then
         . "$STATE_FILE"
@@ -19,6 +20,7 @@ save_state() {
     state_platform="$2"
     state_stow="$3"
     state_packages="$4"
+    state_defaults="$5"
 
     mkdir -p "$STATE_DIR"
 
@@ -27,5 +29,6 @@ STATE_HOST_NAME="$state_host_name"
 STATE_PLATFORM="$state_platform"
 STATE_STOW="$state_stow"
 STATE_PACKAGES="$state_packages"
+STATE_DEFAULTS="$state_defaults"
 EOF
 }

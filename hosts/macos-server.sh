@@ -3,3 +3,4 @@ ROLES="base server headless"
 
 HOST_STOW=""
 HOST_PACKAGE_GROUPS_MACOS="cloud"
+HOST_DEFAULT_GROUPS_MACOS=""

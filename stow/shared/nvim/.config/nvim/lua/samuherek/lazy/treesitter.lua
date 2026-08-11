@@ -25,6 +25,8 @@ return {
 			"go",
 			"terraform",
 			"hcl",
+			"bash",
+			"yaml",
 		})
 
 		vim.api.nvim_create_autocmd("FileType", {
