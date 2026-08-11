@@ -16,6 +16,10 @@ git_worktree_dirty() {
     fi
 }
 
+git_refresh_remote_state() {
+    git -C "$DOTFILES_ROOT" fetch --quiet origin
+}
+
 git_ahead_behind() {
     upstream_branch="$1"
 
@@ -51,6 +55,8 @@ git_sync_status() {
 }
 
 print_git_status() {
+    git_refresh_remote_state
+
     branch_name="$(git_current_branch)"
     upstream_branch="$(git_upstream_branch)"
     sync_status="$(git_sync_status "$upstream_branch")"
