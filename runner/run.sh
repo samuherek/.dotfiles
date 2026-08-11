@@ -24,6 +24,10 @@ dotfiles <command> [host]
 
 Commands:
   help           Show this help
+  help <section> Show section help for packages, roles, or hosts
+  packages --help Show package documentation
+  roles --help   Show role documentation
+  hosts --help   Show host documentation
   status         Show current applied dotfiles state
   host           Show current stored host name
   apply          Install packages and apply stow using stored host, or prompt if none exists
@@ -40,6 +44,28 @@ Commands:
   stow           Apply stow only using stored host, or prompt if none exists
   stow <host>    Apply stow only using the given host
 EOF
+}
+
+print_section_help() {
+    section_name="$1"
+
+    case "$section_name" in
+        packages)
+            readme_path="$DOTFILES_ROOT/packages/README.md"
+            ;;
+        roles)
+            readme_path="$DOTFILES_ROOT/roles/README.md"
+            ;;
+        hosts)
+            readme_path="$DOTFILES_ROOT/hosts/README.md"
+            ;;
+        *)
+            fail "unknown help section: $section_name"
+            ;;
+    esac
+
+    require_file "$readme_path"
+    cat "$readme_path"
 }
 
 resolve_host_name() {
@@ -300,8 +326,33 @@ case "$COMMAND" in
     sync)
         sync_command
         ;;
+    packages)
+        if [ -z "${1:-}" ] || [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
+            print_section_help packages
+        else
+            fail "unknown packages command: ${1:-}"
+        fi
+        ;;
+    roles)
+        if [ -z "${1:-}" ] || [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
+            print_section_help roles
+        else
+            fail "unknown roles command: ${1:-}"
+        fi
+        ;;
+    hosts)
+        if [ -z "${1:-}" ] || [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
+            print_section_help hosts
+        else
+            fail "unknown hosts command: ${1:-}"
+        fi
+        ;;
     help|-h|--help)
-        help_command
+        if [ -n "${1:-}" ]; then
+            print_section_help "$1"
+        else
+            help_command
+        fi
         ;;
     status)
         status_command

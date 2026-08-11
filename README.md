@@ -1,63 +1,148 @@
-# Let's set up the gorgodon
+# Dotfiles
 
-You got a new macos in your hand and have to get it up and running like a champ? Let's get it going....
+This repo manages my machine setup across multiple hosts and roles.
 
-### Step 1
-Make sure to get ready all your secrets like passwords and ssh keys if you want to load them to this machine. 
+It currently handles:
 
-### Step 2
+- stowed dotfiles
+- macOS package groups via Homebrew Brewfiles
+- macOS system defaults
+- macOS app defaults
+- macOS hotkeys
+- post-setup scripts
+- host and role composition
 
-## What this is about 
+## Bootstrap
 
-This repository is the root of all evil. It serves as a way to get my macos computer up to speed for development purposes. Which is every macocs computer I will most likely own :D. 
+On macOS:
 
-1. Install xcode command line tools
-2. Install homebrew
-3. Install homebrew formulas
-4. Install homebrew casks
-5. Start skhd
-6. Start yabai
-7. Apply general OS defaults
-8. Apply app specific defaults
-9. Stow .dotfiles
-10. Create general folder structure
-11. Import ssh keys
-12. Open apps that need to be configured
-13. Ask to update apps and the operating system
-14. 
-
-[ ] software update macos and other internal tools. 'softwareupdate' 'sudo softwareupdate -i -a'
-
-TODO:
-[ ] make a small interactive CLI that will treplace the "init" for easy refresh of installs like homebrew formulas. 
-
-
-- Programatically switch the caps lock key to escape key
-
-- the reduce notion does not apply
-- the space hotkeys doen't apply
-- reduce transparency does not apply
-- there are some errors when applying defaults
-- abstract the stow folders so we can easily run clean env and init on stow with only one set of values
-- Install the kinesis software so I can update keyboard if necessary. But only for the development machines not a laptop? https://kinesis-ergo.com/support/kb360/#smartset-app
-- `git config --global user.email "email@email.com"` -> streemline config
-- `git config --global user.name "your name"` -> streemline config
-- install rust `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
-- install nvm with `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash` and install latest node. We'll always need node for now.
-- Make a small script which is `so` that will do `source .zshrc`
-- add a keyboard shortcut for moving certain windows to different monitors
-
-###`.ssh`
-Make sure to
+```sh
+curl -fsSL https://raw.githubusercontent.com/samuherek/.dotfiles/multimachine/bootstrap/macos/run.sh | bash
 ```
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/config
-chmod 600 ~/.ssh/my_custom_key
+
+Then run:
+
+```sh
+cd ~/.dotfiles
+./runner/run.sh apply
 ```
-and here is a template for the ssh config:
+
+## CLI
+
+The public command is `dotfiles`.
+
+```sh
+dotfiles help
+dotfiles status
+dotfiles host
+dotfiles sync
+
+dotfiles install [host]
+dotfiles defaults [host]
+dotfiles hotkeys [host]
+dotfiles scripts [host]
+dotfiles stow [host]
+dotfiles apply [host]
 ```
-Host github.com
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/my_custom_key
+
+Command meanings:
+
+- `install`: install package groups
+- `defaults`: apply system defaults and app defaults
+- `hotkeys`: apply hotkey groups
+- `scripts`: run post-setup scripts
+- `stow`: apply stowed config
+- `apply`: run the full setup flow
+- `status`: show applied state and repo sync status
+- `sync`: fetch and fast-forward pull the repo when safe
+
+## Apply Order
+
+`dotfiles apply` currently runs in this order:
+
+1. install packages
+2. apply defaults
+3. apply app defaults
+4. apply hotkeys
+5. stow dotfiles
+6. run scripts
+
+## Structure
+
+```text
+bootstrap/  Initial machine bootstrap scripts
+hosts/      Concrete machine definitions
+packages/   Package groups, currently Brewfiles for macOS
+roles/      Reusable role definitions
+runner/     Internal CLI implementation
+scripts/    Post-setup scripts grouped by platform
+stow/       Stow packages grouped by platform/shared
+system/     System defaults, app defaults, and hotkeys grouped by platform
 ```
+
+## Hosts And Roles
+
+- roles describe reusable machine traits like `base`, `developer`, `workstation`, `server`, `headless`
+- hosts compose roles and can add host-specific overrides
+
+Example host:
+
+```sh
+PLATFORM="macos"
+ROLES="base developer workstation"
+```
+
+## State
+
+Applied state is stored locally in:
+
+```sh
+~/.local/state/dotfiles/state.sh
+```
+
+It tracks the current host and the last applied:
+
+- package groups
+- defaults groups
+- app groups
+- hotkey groups
+- script groups
+- stow refs
+
+## Common Examples
+
+Apply a specific host:
+
+```sh
+dotfiles apply macos-dev
+```
+
+Install only:
+
+```sh
+dotfiles install macos-dev
+```
+
+Apply stow only:
+
+```sh
+dotfiles stow
+```
+
+Check current state and repo freshness:
+
+```sh
+dotfiles status
+```
+
+Update the repo when clean:
+
+```sh
+dotfiles sync
+```
+
+## Supporting Docs
+
+- `packages/README.md`
+- `roles/README.md`
+- `hosts/README.md`
