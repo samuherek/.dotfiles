@@ -1,7 +1,7 @@
 PLATFORM="macos"
 ROLES="base server headless"
 
-HOST_STOW=""
+HOST_STOW="shared/zsh-shared macos/zsh-server"
 HOST_PACKAGE_GROUPS_MACOS="cloud"
 HOST_DEFAULT_GROUPS_MACOS=""
 HOST_APP_GROUPS_MACOS=""

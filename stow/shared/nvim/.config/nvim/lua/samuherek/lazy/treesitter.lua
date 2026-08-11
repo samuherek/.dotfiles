@@ -27,6 +27,7 @@ return {
 			"hcl",
 			"bash",
 			"yaml",
+			"sshconfig",
 
 			-- git
 			"gitcommit",

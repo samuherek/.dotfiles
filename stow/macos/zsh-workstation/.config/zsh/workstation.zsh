@@ -1,4 +1,3 @@
-export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 
 # Let's set colored prompt
@@ -7,13 +6,13 @@ PS1='%F{blue}%n@%m%f %F{cyan}%1~%f %# '
 export EDITOR=$VIM
 export GIT_EDITOR=$VIM
 
-# Not sure where this comes from 
+# Not sure where this comes from
 PATH="/usr/local/bin:$PATH"
 # this is rust related. They wanted me to do this
 PATH="$HOME/.cargo/bin:$PATH"
 # this is go related. They wanted me to do this
 PATH="$(go env GOPATH)/bin:$PATH"
-# This is personal bin scripts 
+# This is personal bin scripts
 PATH="$HOME/.bin:$PATH"
 #Ruby shit
 PATH="$HOME/.rbenv/bin:$PATH"
@@ -25,7 +24,7 @@ PATH="$PATH:$HOME/Library/Python/3.9/bin"
 # can not find the "pg_config" bin that is required for some packages.
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
-#Path to local dev project 
+#Path to local dev project
 PATH="$PATH:$HOME/personal/ghi/target/release"
 PATH="$PATH:$HOME/personal/dirpin/target/debug"
 
@@ -34,14 +33,9 @@ export PATH
 # direnv hook so that it loads .envrc in directory
 eval "$(direnv hook zsh)"
 
-# helper to quickly source zsh changes in the shell
-function so() {
-    source ~/.zsh_profile
-}
-
 # copy absolute path to a file into clipboard
 function pwdc() {
-    local val="$1"     
+    local val="$1"
     if [ -z "$val" ]; then
         echo "No file or directory specified."
         return 0
@@ -51,7 +45,7 @@ function pwdc() {
         local value="$(pwd)/$val"
         echo "copied $value"
         echo "$value" | pbcopy
-    else 
+    else
         echo "File or directory does not exist."
         return 0
     fi
@@ -86,7 +80,6 @@ bindkey '^F' quick-dir-widget
 # ZLE widget: pick a command from your zsh history with fzf, insert at cursor
 h-widget() {
   local cmd
-  # fc -ln 1 = list history with no numbers, from entry 1
   cmd=$(fc -ln 1 | awk '!seen[$0]++' | fzf) || return
   LBUFFER+="$cmd"
 }
@@ -94,8 +87,8 @@ zle -N h-widget
 bindkey '^H' h-widget
 
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
 #Ruby shit
 eval "$(rbenv init -)"
