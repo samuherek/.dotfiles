@@ -11,6 +11,7 @@ load_host() {
     ROLES=""
 
     HOST_STOW=""
+    HOST_PACKAGE_GROUPS_MACOS=""
 
     source "$host_file"
 

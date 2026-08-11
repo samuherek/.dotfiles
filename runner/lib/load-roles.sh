@@ -7,6 +7,7 @@ load_roles() {
 
     ROLE_STOW_SHARED_ACCUM=""
     ROLE_STOW_PLATFORM_ACCUM=""
+    ROLE_PACKAGE_GROUPS_ACCUM=""
 
     for role in $roles; do
         role_file="$dotfiles_root/roles/$role.sh"
@@ -17,6 +18,7 @@ load_roles() {
         ROLE_STOW_MACOS=""
         ROLE_STOW_LINUX=""
         ROLE_STOW_NAS=""
+        ROLE_PACKAGE_GROUPS_MACOS=""
 
         . "$role_file"
 
@@ -25,6 +27,7 @@ load_roles() {
         case "$platform" in
             macos)
                 ROLE_STOW_PLATFORM_ACCUM="$(merge_lists "$ROLE_STOW_PLATFORM_ACCUM" "$ROLE_STOW_MACOS")"
+                ROLE_PACKAGE_GROUPS_ACCUM="$(merge_lists "$ROLE_PACKAGE_GROUPS_ACCUM" "$ROLE_PACKAGE_GROUPS_MACOS")"
                 ;;
             linux)
                 ROLE_STOW_PLATFORM_ACCUM="$(merge_lists "$ROLE_STOW_PLATFORM_ACCUM" "$ROLE_STOW_LINUX")"
@@ -40,4 +43,5 @@ load_roles() {
 
     ROLE_STOW_SHARED="$ROLE_STOW_SHARED_ACCUM"
     ROLE_STOW_PLATFORM="$ROLE_STOW_PLATFORM_ACCUM"
+    ROLE_PACKAGE_GROUPS="$ROLE_PACKAGE_GROUPS_ACCUM"
 }

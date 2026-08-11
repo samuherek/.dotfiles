@@ -6,3 +6,5 @@ ROLE_STOW_SHARED="zsh git bin"
 ROLE_STOW_MACOS=""
 ROLE_STOW_LINUX=""
 ROLE_STOW_NAS=""
+
+ROLE_PACKAGE_GROUPS_MACOS="dotfiles terminal security"

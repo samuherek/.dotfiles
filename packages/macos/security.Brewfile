@@ -1,0 +1,1 @@
+brew "proton-pass-cli"

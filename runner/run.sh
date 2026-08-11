@@ -10,6 +10,7 @@ source "$RUNNER_DIR/lib/merge-lists.sh"
 source "$RUNNER_DIR/lib/load-host.sh"
 source "$RUNNER_DIR/lib/load-roles.sh"
 source "$RUNNER_DIR/lib/apply-stow.sh"
+source "$RUNNER_DIR/lib/apply-packages.sh"
 source "$RUNNER_DIR/lib/state.sh"
 
 help_command() {
@@ -20,8 +21,12 @@ Commands:
   help           Show this help
   status         Show current applied dotfiles state
   host           Show current stored host name
-  apply          Apply using stored host, or prompt if none exists
-  apply <host>   Apply using the given host
+  apply          Install packages and apply stow using stored host, or prompt if none exists
+  apply <host>   Install packages and apply stow using the given host
+  install        Install packages only using stored host, or prompt if none exists
+  install <host> Install packages only using the given host
+  stow           Apply stow only using stored host, or prompt if none exists
+  stow <host>    Apply stow only using the given host
 EOF
 }
 
@@ -48,27 +53,77 @@ resolve_host_name() {
     printf '%s\n' "$input_host_name"
 }
 
-apply_command() {
-    HOST_NAME="$(resolve_host_name "${1:-}")"
-
-    load_host "$DOTFILES_ROOT" "$HOST_NAME"
-    load_roles "$DOTFILES_ROOT" "$PLATFORM" "$ROLES"
-
+resolve_final_stow() {
     FINAL_STOW="$(merge_lists \
         "$(prefix_list "shared" "$ROLE_STOW_SHARED")" \
         "$(prefix_list "$PLATFORM" "$ROLE_STOW_PLATFORM")" \
         "$HOST_STOW"
     )"
+}
+
+resolve_final_packages() {
+    case "$PLATFORM" in
+        macos)
+            FINAL_PACKAGES="$(merge_lists "$ROLE_PACKAGE_GROUPS" "$HOST_PACKAGE_GROUPS_MACOS")"
+            ;;
+        linux|nas)
+            FINAL_PACKAGES=""
+            ;;
+        *)
+            fail "unsupported platform: $PLATFORM"
+            ;;
+    esac
+}
+
+load_host_config() {
+    HOST_NAME="$(resolve_host_name "${1:-}")"
+
+    load_host "$DOTFILES_ROOT" "$HOST_NAME"
+    load_roles "$DOTFILES_ROOT" "$PLATFORM" "$ROLES"
+    resolve_final_stow
+    resolve_final_packages
+}
+
+print_apply_summary() {
+    printf 'Host: %s\n' "$HOST_NAME"
+    printf 'Platform: %s\n' "$PLATFORM"
+    printf 'Roles: %s\n' "$ROLES"
+    printf 'Packages: %s\n' "$FINAL_PACKAGES"
+    printf 'Stow: %s\n' "$FINAL_STOW"
+}
+
+apply_command() {
+    load_host_config "${1:-}"
+
+    load_state
+    apply_packages "$FINAL_PACKAGES"
+    apply_stow "$STATE_STOW" "$FINAL_STOW"
+
+    print_apply_summary
+
+    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$FINAL_PACKAGES"
+}
+
+install_command() {
+    load_host_config "${1:-}"
+
+    load_state
+    apply_packages "$FINAL_PACKAGES"
+
+    print_apply_summary
+
+    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$FINAL_PACKAGES"
+}
+
+stow_command() {
+    load_host_config "${1:-}"
 
     load_state
     apply_stow "$STATE_STOW" "$FINAL_STOW"
 
-    printf 'Host: %s\n' "$HOST_NAME"
-    printf 'Platform: %s\n' "$PLATFORM"
-    printf 'Roles: %s\n' "$ROLES"
-    printf 'Stow: %s\n' "$FINAL_STOW"
+    print_apply_summary
 
-    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW"
+    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$STATE_PACKAGES"
 }
 
 status_command() {
@@ -80,6 +135,7 @@ status_command() {
 
     printf 'Host: %s\n' "$STATE_HOST_NAME"
     printf 'Platform: %s\n' "$STATE_PLATFORM"
+    printf 'Packages: %s\n' "$STATE_PACKAGES"
     printf 'Stow: %s\n' "$STATE_STOW"
 }
 
@@ -105,11 +161,17 @@ case "$COMMAND" in
     apply)
         apply_command "${1:-}"
         ;;
+    install)
+        install_command "${1:-}"
+        ;;
     help|-h|--help)
         help_command
         ;;
     status)
         status_command
+        ;;
+    stow)
+        stow_command "${1:-}"
         ;;
     host)
         host_command

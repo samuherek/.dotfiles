@@ -1,0 +1,7 @@
+brew "ansible"
+brew "overmind"
+brew "anomalyco/tap/opencode"
+brew "pnpm"
+brew "sops"
+brew "tokei"
+brew "watchman"

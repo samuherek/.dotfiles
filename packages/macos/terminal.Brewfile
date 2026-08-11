@@ -1,0 +1,6 @@
+brew "direnv"
+brew "fzf"
+brew "git"
+brew "git-delta"
+brew "htop"
+brew "jq"

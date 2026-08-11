@@ -1,0 +1,5 @@
+cask "hammerspoon"
+cask "keepingyouawake"
+cask "wezterm"
+cask "signal"
+cask "spotify"

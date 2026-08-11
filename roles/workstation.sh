@@ -6,3 +6,5 @@ ROLE_STOW_SHARED=""
 ROLE_STOW_MACOS="wezterm yabai skhd hammerspoon"
 ROLE_STOW_LINUX=""
 ROLE_STOW_NAS=""
+
+ROLE_PACKAGE_GROUPS_MACOS="gui workstation-apps browsers networking"
