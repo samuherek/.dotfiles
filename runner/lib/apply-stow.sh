@@ -1,5 +1,15 @@
 #!/bin/sh
 
+ensure_stow_target_dirs() {
+    if [ -L "$HOME/.config" ]; then
+        fail "$HOME/.config is a symlink; remove it and recreate it as a directory"
+    fi
+
+    if [ ! -e "$HOME/.config" ]; then
+        mkdir -p "$HOME/.config"
+    fi
+}
+
 stow_refs_for_namespace() {
     namespace="$1"
     stow_refs="$2"
@@ -35,6 +45,8 @@ apply_stow_namespace() {
 apply_stow() {
     old_stow="$1"
     new_stow="$2"
+
+    ensure_stow_target_dirs
 
     for namespace in shared macos linux nas; do
         old_packages="$(stow_refs_for_namespace "$namespace" "$old_stow")"
