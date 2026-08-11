@@ -27,6 +27,13 @@ return {
 			"hcl",
 			"bash",
 			"yaml",
+
+			-- git
+			"gitcommit",
+			"git_config",
+			"git_rebase",
+			"gitattributes",
+			"gitignore",
 		})
 
 		vim.api.nvim_create_autocmd("FileType", {

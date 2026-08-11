@@ -9,12 +9,23 @@ function _G.get_oil_winbar()
 		return vim.api.nvim_buf_get_name(0)
 	end
 
+	vim.api.nvim_set_hl(0, "OilWinbarPrefixModified", {
+		fg = "#e5c07b",
+		bold = true,
+	})
+
+	local prefix
+	if vim.bo.modified then
+		prefix = "%#OilWinbarPrefixModified#oil:// %*"
+	else
+		prefix = "oil:// %*"
+	end
+
 	dir = dir:gsub("^/", "")
 	dir = dir:gsub("/$", "")
 	dir = dir:gsub("/", " > ")
 
-	return "oil:// " .. dir
-	-- return vim.fn.fnamemodify(dir, ":~")
+	return prefix .. dir
 end
 
 return {

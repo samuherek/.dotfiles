@@ -9,6 +9,9 @@ load_state() {
     STATE_STOW=""
     STATE_PACKAGES=""
     STATE_DEFAULTS=""
+    STATE_APPS=""
+    STATE_HOTKEYS=""
+    STATE_SCRIPTS=""
 
     if [ -f "$STATE_FILE" ]; then
         . "$STATE_FILE"
@@ -21,6 +24,9 @@ save_state() {
     state_stow="$3"
     state_packages="$4"
     state_defaults="$5"
+    state_apps="$6"
+    state_hotkeys="$7"
+    state_scripts="$8"
 
     mkdir -p "$STATE_DIR"
 
@@ -30,5 +36,8 @@ STATE_PLATFORM="$state_platform"
 STATE_STOW="$state_stow"
 STATE_PACKAGES="$state_packages"
 STATE_DEFAULTS="$state_defaults"
+STATE_APPS="$state_apps"
+STATE_HOTKEYS="$state_hotkeys"
+STATE_SCRIPTS="$state_scripts"
 EOF
 }

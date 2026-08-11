@@ -13,6 +13,9 @@ load_host() {
     HOST_STOW=""
     HOST_PACKAGE_GROUPS_MACOS=""
     HOST_DEFAULT_GROUPS_MACOS=""
+    HOST_APP_GROUPS_MACOS=""
+    HOST_HOTKEY_GROUPS_MACOS=""
+    HOST_SCRIPT_GROUPS_MACOS=""
 
     source "$host_file"
 

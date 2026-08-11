@@ -12,6 +12,9 @@ source "$RUNNER_DIR/lib/load-roles.sh"
 source "$RUNNER_DIR/lib/apply-stow.sh"
 source "$RUNNER_DIR/lib/apply-packages.sh"
 source "$RUNNER_DIR/lib/apply-defaults.sh"
+source "$RUNNER_DIR/lib/apply-apps.sh"
+source "$RUNNER_DIR/lib/apply-hotkeys.sh"
+source "$RUNNER_DIR/lib/apply-scripts.sh"
 source "$RUNNER_DIR/lib/state.sh"
 
 help_command() {
@@ -24,10 +27,14 @@ Commands:
   host           Show current stored host name
   apply          Install packages and apply stow using stored host, or prompt if none exists
   apply <host>   Install packages and apply stow using the given host
-  defaults       Apply defaults only using stored host, or prompt if none exists
-  defaults <host> Apply defaults only using the given host
+  defaults       Apply defaults and app defaults using stored host, or prompt if none exists
+  defaults <host> Apply defaults and app defaults using the given host
+  hotkeys        Apply hotkeys only using stored host, or prompt if none exists
+  hotkeys <host> Apply hotkeys only using the given host
   install        Install packages only using stored host, or prompt if none exists
   install <host> Install packages only using the given host
+  scripts        Apply scripts only using stored host, or prompt if none exists
+  scripts <host> Apply scripts only using the given host
   stow           Apply stow only using stored host, or prompt if none exists
   stow <host>    Apply stow only using the given host
 EOF
@@ -92,6 +99,48 @@ resolve_final_defaults() {
     esac
 }
 
+resolve_final_apps() {
+    case "$PLATFORM" in
+        macos)
+            FINAL_APPS="$(merge_lists "$ROLE_APP_GROUPS" "$HOST_APP_GROUPS_MACOS")"
+            ;;
+        linux|nas)
+            FINAL_APPS=""
+            ;;
+        *)
+            fail "unsupported platform: $PLATFORM"
+            ;;
+    esac
+}
+
+resolve_final_hotkeys() {
+    case "$PLATFORM" in
+        macos)
+            FINAL_HOTKEYS="$(merge_lists "$ROLE_HOTKEY_GROUPS" "$HOST_HOTKEY_GROUPS_MACOS")"
+            ;;
+        linux|nas)
+            FINAL_HOTKEYS=""
+            ;;
+        *)
+            fail "unsupported platform: $PLATFORM"
+            ;;
+    esac
+}
+
+resolve_final_scripts() {
+    case "$PLATFORM" in
+        macos)
+            FINAL_SCRIPTS="$(merge_lists "$ROLE_SCRIPT_GROUPS" "$HOST_SCRIPT_GROUPS_MACOS")"
+            ;;
+        linux|nas)
+            FINAL_SCRIPTS=""
+            ;;
+        *)
+            fail "unsupported platform: $PLATFORM"
+            ;;
+    esac
+}
+
 load_host_config() {
     HOST_NAME="$(resolve_host_name "${1:-}")"
 
@@ -100,6 +149,9 @@ load_host_config() {
     resolve_final_stow
     resolve_final_packages
     resolve_final_defaults
+    resolve_final_apps
+    resolve_final_hotkeys
+    resolve_final_scripts
 }
 
 print_apply_summary() {
@@ -108,6 +160,9 @@ print_apply_summary() {
     printf 'Roles: %s\n' "$ROLES"
     printf 'Packages: %s\n' "$FINAL_PACKAGES"
     printf 'Defaults: %s\n' "$FINAL_DEFAULTS"
+    printf 'Apps: %s\n' "$FINAL_APPS"
+    printf 'Hotkeys: %s\n' "$FINAL_HOTKEYS"
+    printf 'Scripts: %s\n' "$FINAL_SCRIPTS"
     printf 'Stow: %s\n' "$FINAL_STOW"
 }
 
@@ -117,11 +172,14 @@ apply_command() {
     load_state
     apply_packages "$FINAL_PACKAGES"
     apply_defaults "$FINAL_DEFAULTS"
+    apply_apps "$FINAL_APPS"
+    apply_hotkeys "$FINAL_HOTKEYS"
     apply_stow "$STATE_STOW" "$FINAL_STOW"
+    apply_scripts "$FINAL_SCRIPTS"
 
     print_apply_summary
 
-    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$FINAL_PACKAGES" "$FINAL_DEFAULTS"
+    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$FINAL_PACKAGES" "$FINAL_DEFAULTS" "$FINAL_APPS" "$FINAL_HOTKEYS" "$FINAL_SCRIPTS"
 }
 
 defaults_command() {
@@ -129,10 +187,22 @@ defaults_command() {
 
     load_state
     apply_defaults "$FINAL_DEFAULTS"
+    apply_apps "$FINAL_APPS"
 
     print_apply_summary
 
-    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$STATE_PACKAGES" "$FINAL_DEFAULTS"
+    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$STATE_PACKAGES" "$FINAL_DEFAULTS" "$FINAL_APPS" "$STATE_HOTKEYS" "$STATE_SCRIPTS"
+}
+
+hotkeys_command() {
+    load_host_config "${1:-}"
+
+    load_state
+    apply_hotkeys "$FINAL_HOTKEYS"
+
+    print_apply_summary
+
+    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$STATE_PACKAGES" "$STATE_DEFAULTS" "$STATE_APPS" "$FINAL_HOTKEYS" "$STATE_SCRIPTS"
 }
 
 install_command() {
@@ -143,7 +213,18 @@ install_command() {
 
     print_apply_summary
 
-    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$FINAL_PACKAGES" "$STATE_DEFAULTS"
+    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$FINAL_PACKAGES" "$STATE_DEFAULTS" "$STATE_APPS" "$STATE_HOTKEYS" "$STATE_SCRIPTS"
+}
+
+scripts_command() {
+    load_host_config "${1:-}"
+
+    load_state
+    apply_scripts "$FINAL_SCRIPTS"
+
+    print_apply_summary
+
+    save_state "$HOST_NAME" "$PLATFORM" "$STATE_STOW" "$STATE_PACKAGES" "$STATE_DEFAULTS" "$STATE_APPS" "$STATE_HOTKEYS" "$FINAL_SCRIPTS"
 }
 
 stow_command() {
@@ -154,7 +235,7 @@ stow_command() {
 
     print_apply_summary
 
-    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$STATE_PACKAGES" "$STATE_DEFAULTS"
+    save_state "$HOST_NAME" "$PLATFORM" "$FINAL_STOW" "$STATE_PACKAGES" "$STATE_DEFAULTS" "$STATE_APPS" "$STATE_HOTKEYS" "$STATE_SCRIPTS"
 }
 
 status_command() {
@@ -168,6 +249,9 @@ status_command() {
     printf 'Platform: %s\n' "$STATE_PLATFORM"
     printf 'Packages: %s\n' "$STATE_PACKAGES"
     printf 'Defaults: %s\n' "$STATE_DEFAULTS"
+    printf 'Apps: %s\n' "$STATE_APPS"
+    printf 'Hotkeys: %s\n' "$STATE_HOTKEYS"
+    printf 'Scripts: %s\n' "$STATE_SCRIPTS"
     printf 'Stow: %s\n' "$STATE_STOW"
 }
 
@@ -196,8 +280,14 @@ case "$COMMAND" in
     defaults)
         defaults_command "${1:-}"
         ;;
+    hotkeys)
+        hotkeys_command "${1:-}"
+        ;;
     install)
         install_command "${1:-}"
+        ;;
+    scripts)
+        scripts_command "${1:-}"
         ;;
     help|-h|--help)
         help_command

@@ -9,3 +9,6 @@ ROLE_STOW_NAS=""
 
 ROLE_PACKAGE_GROUPS_MACOS="dotfiles terminal security"
 ROLE_DEFAULT_GROUPS_MACOS="ui finder software keyboard misc kill-apps"
+ROLE_APP_GROUPS_MACOS=""
+ROLE_HOTKEY_GROUPS_MACOS=""
+ROLE_SCRIPT_GROUPS_MACOS="home-dirs"
