@@ -15,6 +15,7 @@ source "$RUNNER_DIR/lib/apply-defaults.sh"
 source "$RUNNER_DIR/lib/apply-apps.sh"
 source "$RUNNER_DIR/lib/apply-hotkeys.sh"
 source "$RUNNER_DIR/lib/apply-scripts.sh"
+source "$RUNNER_DIR/lib/git-status.sh"
 source "$RUNNER_DIR/lib/state.sh"
 
 help_command() {
@@ -35,6 +36,7 @@ Commands:
   install <host> Install packages only using the given host
   scripts        Apply scripts only using stored host, or prompt if none exists
   scripts <host> Apply scripts only using the given host
+  sync           Fetch and fast-forward pull the dotfiles repo if safe
   stow           Apply stow only using stored host, or prompt if none exists
   stow <host>    Apply stow only using the given host
 EOF
@@ -253,6 +255,7 @@ status_command() {
     printf 'Hotkeys: %s\n' "$STATE_HOTKEYS"
     printf 'Scripts: %s\n' "$STATE_SCRIPTS"
     printf 'Stow: %s\n' "$STATE_STOW"
+    print_git_status
 }
 
 host_command() {
@@ -263,6 +266,11 @@ host_command() {
     fi
 
     printf '%s\n' "$STATE_HOST_NAME"
+}
+
+sync_command() {
+    sync_repo
+    print_git_status
 }
 
 if [ "$#" -lt 1 ]; then
@@ -288,6 +296,9 @@ case "$COMMAND" in
         ;;
     scripts)
         scripts_command "${1:-}"
+        ;;
+    sync)
+        sync_command
         ;;
     help|-h|--help)
         help_command
