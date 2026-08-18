@@ -27,6 +27,8 @@ return {
 			"hcl",
 			"bash",
 			"yaml",
+			"markdown",
+			"sql",
 
 			-- git
 			"gitcommit",
@@ -39,6 +41,11 @@ return {
 		vim.api.nvim_create_autocmd("FileType", {
 			callback = function()
 				pcall(vim.treesitter.start)
+				-- vim.treesitter.start() -- using this started complaining about oil
+				-- This is to enable folding on the open file
+				-- vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+				-- vim.wo[0][0].foldmethod = "expr"
+				-- vim.wo[0][0].foldlevel = 1
 			end,
 		})
 	end,
