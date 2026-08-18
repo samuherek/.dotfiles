@@ -2,7 +2,7 @@
 
 ROLE_NAME="base"
 
-ROLE_STOW_SHARED="git bin"
+ROLE_STOW_SHARED="git bin nvim"
 ROLE_STOW_MACOS=""
 ROLE_STOW_LINUX=""
 ROLE_STOW_NAS=""
