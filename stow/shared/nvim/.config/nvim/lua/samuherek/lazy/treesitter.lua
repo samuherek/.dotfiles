@@ -29,6 +29,8 @@ return {
 			"yaml",
 			"markdown",
 			"sql",
+			"ssh_config",
+			"templ",
 
 			-- git
 			"gitcommit",

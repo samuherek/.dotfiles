@@ -21,10 +21,58 @@ return {
 		vim.keymap.set("n", "<leader>ts", function()
 			builtin.grep_string({ search = vim.fn.input("Grep > ") })
 		end, { desc = "Grep string" })
-		vim.api.nvim_create_user_command("GrepDir", function()
-			local dir = vim.fn.expand("%:p")
-			builtin.grep_string({ cwd = dir, search = vim.fn.input("Grep dir > ") })
-		end, { desc = "Grep directory" })
+
+		local function current_directory()
+			if vim.bo.filetype == "oil" then
+				return require("oil").get_current_dir()
+			end
+
+			return vim.fn.expand("%:p:h")
+		end
+
+		vim.keymap.set("n", "<leader>tds", function()
+			local dir = current_directory()
+			if dir == nil then
+				vim.notify("Could not determine directory", vim.log.levels.ERROR)
+				return
+			end
+
+			builtin.grep_string({
+				cwd = dir,
+				search = vim.fn.input("Grep dir > "),
+			})
+		end, { desc = "Grep current directory" })
+
+		-- vim.keymap.set("n", "<leader>fp", function()
+		-- 	builtin.live_grep()
+		-- end, { desc = "Grep project" })
+
+		-- vim.api.nvim_create_user_command("GrepDir", function()
+		-- 	local dir
+		--
+		-- 	if vim.bo.filetype == "oil" then
+		-- 		dir = require("oil").get_current_dir(0)
+		-- 	else
+		-- 		dir = vim.fn.expand("%:p:h")
+		-- 	end
+		--
+		-- 	if not dir then
+		-- 		vim.notify("Could not determine directory", vim.log.levels.ERROR)
+		-- 		return
+		-- 	end
+		--
+		-- 	builtin.grep_string({
+		-- 		cwd = dir,
+		-- 		search = vim.fn.input("Grep dir > "),
+		-- 	})
+		-- end, { desc = "Grep directory" })
+
+		-- COMMENT: this is old stuff that worked in the netrw plugin but not in oil
+		-- vim.api.nvim_create_user_command("GrepDir", function()
+		-- 	local dir = vim.fn.expand("%:p")
+		-- 	builtin.grep_string({ cwd = dir, search = vim.fn.input("Grep dir > ") })
+		-- end, { desc = "Grep directory" })
+
 		vim.keymap.set("n", "<leader>tr", builtin.lsp_references, { desc = "References" })
 		vim.keymap.set("n", "<leader>te", builtin.lsp_document_symbols, { desc = "Document symbols" })
 		vim.keymap.set("n", "<leader>tw", builtin.grep_string, { desc = "Word" })
