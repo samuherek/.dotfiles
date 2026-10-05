@@ -31,6 +31,7 @@ return {
 			"sql",
 			"ssh_config",
 			"templ",
+			"json",
 
 			-- git
 			"gitcommit",
