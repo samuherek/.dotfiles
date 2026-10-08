@@ -20,12 +20,6 @@ defaults write com.apple.universalaccess reduceTransparency -bool true
 defaults write com.apple.universalaccess reduceMotion -bool true
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 
-# Mission control
-defaults write com.apple.dock wvous-tl-corner -int 2  # Top left → Mission control
-defaults write com.apple.dock wvous-tr-corner -int 12 # Top right → Notification Center
-defaults write com.apple.dock wvous-bl-corner -int 10 # Bottom left → Put display to sleep
-defaults write com.apple.dock wvous-br-corner -int 4  # Bottom right → Desktop
-
 # Menu bar
 defaults write NSGlobalDomain _HIHideMenuBar -bool true
 
