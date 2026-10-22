@@ -32,6 +32,7 @@ return {
 			"ssh_config",
 			"templ",
 			"json",
+			"toml",
 
 			-- git
 			"gitcommit",

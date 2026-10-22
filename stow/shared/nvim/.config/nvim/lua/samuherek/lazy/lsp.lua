@@ -50,6 +50,15 @@ return {
 			},
 		})
 
+		-- This is because in evvex project we have integration tests with build tags
+		vim.lsp.config("gopls", {
+			settings = {
+				gopls = {
+					buildFlags = { "-tags=integration" },
+				},
+			},
+		})
+
 		vim.lsp.enable({
 			"ts_ls",
 			"rust_analyzer",
