@@ -4,50 +4,53 @@
 create_or_attach_tmux_session() {
     local session_name="$1"
     local current_dir="$2"
-    local session_command="$3"
 
-  # Check if a tmux session with the provided name exists
-  if tmux has-session -t "$session_name" 2>/dev/null; then
-      # If it exists, attach to the existing session
-      tmux attach-session -t "$session_name"
-  else
-      # If it doesn't exist, create a new session with two windows
-      tmux new-session -d -s "$session_name" -c "$current_dir"
+    # "=" forces an exact name match. Without it tmux falls back to prefix
+    # matching, so "su" would resolve to an existing "su-homelab" session.
+    local target="=$session_name"
 
-    # Check if a session configuration file exists (.json)
-    config_file="$current_dir/.s"
-
-    if [ -f "$config_file" ]; then
-
-        # Parse session configuration from the JSON file
-        local session_config=$(jq -c '.[]' < "$config_file")
-
-        while read -r line; do
-            local window_name=$(echo "$line" | jq -r '.name')
-            local window_path=$(echo "$line" | jq -r '.path')
-            local window_command=$(echo "$line" | jq -r '.command' )
-
-            # Create a new window with the specified name and path
-            if [ -n "$window_name" ]; then
-                if [ -n "$window_path" ]; then
-                    tmux new-window -t "$session_name" -n "$window_name" -c "$window_path"
-                else
-                    tmux new-window -t "$session_name" -n "$window_name" -c "$current_dir"
-                fi
-            fi
-
-            # Execute a command in the window if specified
-            if [ -n "$window_command" ]; then
-                tmux send-keys -t "$session_name:$window_name" "$window_command" C-m
-            fi
-        done <<< "$session_config"
+    # Check if a tmux session with the provided name exists
+    if tmux has-session -t "$target" 2>/dev/null; then
+        # If it exists, attach to the existing session
+        tmux attach-session -t "$target"
     else
-        # If no configuration file, create a second default window
-        tmux new-window -t "$session_name" -c "$current_dir"
-        tmux select-window -t "${session_Name}:0"
-    fi
+        # If it doesn't exist, create a new session
+        tmux new-session -d -s "$session_name" -c "$current_dir"
+
+        # Check if a session configuration file exists (.json)
+        local config_file="$current_dir/.s"
+
+        if [ -f "$config_file" ]; then
+
+            # Parse session configuration from the JSON file
+            local session_config
+            session_config=$(jq -c '.[]' < "$config_file")
+
+            while read -r line; do
+                local window_name window_path window_command
+                # "// empty" avoids the literal string "null" for missing keys
+                window_name=$(echo "$line" | jq -r '.name // empty')
+                window_path=$(echo "$line" | jq -r '.path // empty')
+                window_command=$(echo "$line" | jq -r '.command // empty')
+
+                # Create a new window with the specified name and path
+                if [ -n "$window_name" ]; then
+                    tmux new-window -t "$target:" -n "$window_name" -c "${window_path:-$current_dir}"
+
+                    # Execute a command in the window if specified
+                    if [ -n "$window_command" ]; then
+                        tmux send-keys -t "$target:$window_name" "$window_command" C-m
+                    fi
+                fi
+            done <<< "$session_config"
+        else
+            # If no configuration file, create a second default window
+            tmux new-window -t "$target:" -c "$current_dir"
+            tmux select-window -t "$target:^"
+        fi
+
         # Attach to the newly created session
-        tmux attach-session -t "$session_name"
+        tmux attach-session -t "$target"
     fi
 }
 
@@ -57,10 +60,10 @@ if [ $# -eq 0 ]; then
 else
     current_dir="$1"
 
-  # Convert a directory name to an absolute path
-  if [[ ! "$current_dir" = /* ]]; then
-      current_dir="$(pwd)/$current_dir"
-  fi
+    # Convert a directory name to an absolute path
+    if [[ ! "$current_dir" = /* ]]; then
+        current_dir="$(pwd)/$current_dir"
+    fi
 fi
 
 # Extract the session name from the directory path
@@ -70,6 +73,10 @@ session_name=$(basename "$current_dir")
 if [[ "$session_name" == .* ]]; then
     session_name="${session_name#\.}"
 fi
+
+# tmux rewrites "." and ":" in session names to "_", so do the same up front
+# so that has-session can find the session again on the next run
+session_name="${session_name//[.:]/_}"
 
 # Check if we are already inside a tmux session
 if [ -n "$TMUX" ]; then
