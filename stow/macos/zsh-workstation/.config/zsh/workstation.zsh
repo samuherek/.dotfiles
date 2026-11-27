@@ -33,6 +33,9 @@ export PATH
 # direnv hook so that it loads .envrc in directory
 eval "$(direnv hook zsh)"
 
+# mise hook so that it loads the mise.toml automatically
+eval "$(mise activate zsh)"
+
 # copy absolute path to a file into clipboard
 function pwdc() {
     local val="$1"

@@ -12,6 +12,7 @@ return {
 		ts.install({
 			"javascript",
 			"typescript",
+			"tsx",
 			"c",
 			"lua",
 			"rust",
