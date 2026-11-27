@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Focus a session: attach from a plain terminal, switch the client from inside
+# tmux (attaching from inside tmux would nest sessions, which tmux refuses).
+# The session comes up on its last focused window.
+focus_tmux_session() {
+    local target="$1"
+
+    if [ -n "$TMUX" ]; then
+        tmux switch-client -t "$target"
+    else
+        tmux attach-session -t "$target"
+    fi
+}
+
 # Function to create or attach to a tmux session
 create_or_attach_tmux_session() {
     local session_name="$1"
@@ -11,11 +24,11 @@ create_or_attach_tmux_session() {
 
     # Check if a tmux session with the provided name exists
     if tmux has-session -t "$target" 2>/dev/null; then
-        # If it exists, attach to the existing session
-        tmux attach-session -t "$target"
+        # If it exists, focus it on its last focused window
+        focus_tmux_session "$target"
     else
-        # If it doesn't exist, create a new session
-        tmux new-session -d -s "$session_name" -c "$current_dir"
+        # If it doesn't exist, create a new session whose first window is "nvim"
+        tmux new-session -d -s "$session_name" -n nvim -c "$current_dir"
 
         # Check if a session configuration file exists (.json)
         local config_file="$current_dir/.s"
@@ -46,11 +59,13 @@ create_or_attach_tmux_session() {
         else
             # If no configuration file, create a second default window
             tmux new-window -t "$target:" -c "$current_dir"
-            tmux select-window -t "$target:^"
         fi
 
-        # Attach to the newly created session
-        tmux attach-session -t "$target"
+        # Start on the first window ("nvim")
+        tmux select-window -t "$target:^"
+
+        # Focus the newly created session
+        focus_tmux_session "$target"
     fi
 }
 
@@ -85,7 +100,7 @@ if [ -n "$TMUX" ]; then
         # If it's the same session, do nothing (you are already in it)
         exit 0
     else
-        # If it's a different session, call the function to attach/create
+        # If it's a different session, create it if needed and switch to it
         create_or_attach_tmux_session "$session_name" "$current_dir"
     fi
 else

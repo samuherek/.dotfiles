@@ -62,14 +62,19 @@ function in() {
     fi
 }
 
-# ZLE widget: quick directory navigation
+# ZLE widget: pick a directory with fzf and open its tmux session via "s"
+# (creates the session if needed; switches to it when already inside tmux)
 quick-dir-widget() {
   local selected
   selected=$(quick_dir) || return
-  [[ -z $selected ]] && return
-  if [[ -d $selected ]]; then
-    builtin cd -- "$selected"
+  if [[ -z $selected ]]; then
     zle reset-prompt
+    return
+  fi
+  if [[ -d $selected ]]; then
+    # Run "s" as a normal command so tmux gets the terminal
+    BUFFER="s ${(q)selected}"
+    zle accept-line
   else
     zle -M "Not a directory: $selected"
   fi
